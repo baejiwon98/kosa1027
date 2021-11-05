@@ -116,8 +116,43 @@ public class Ex28 {
 			System.out.println(i+ "단 끝");
 		}
 		
+		// 27. 임의의 단의 범위를 가지는 dan1과 dan2가 있고 임의의 곱의 범위를 가지는  gom1과 gom2가 있는 
+		// 6         7                                                   4        6
+		//위 조간에 맞게 출력될 수 있게 프로그래밍 하시오.
 		
+		for (int i = 6; i<=7 ; i++) {
+			for (int j = 4; j<=6; j++) {
+				System.out.println(i+ " * "+ j + " = " + i * j);
+			}	
+		}
 		
+		/*28. html 의 table 태그 출력
+			<table>
+			<tr><td> 1 </td><td> 2 </td><td> 3 </td><td> 4 </td></tr>
+			<tr><td> 1 </td><td> 2 </td><td> 3 </td><td> 4 </td></tr>
+			<tr><td> 1 </td><td> 2 </td><td> 3 </td><td> 4 </td></tr>
+			<tr><td> 1 </td><td> 2 </td><td> 3 </td><td> 4 </td></tr>
+			</table>
+		 * */
+		System.out.println("<table>");
+		for (int i = 1; i<=4; i++) {
+			System.out.print("<tr>");
+			for (int j = 1;j<=4;j++) {
+				System.out.print("<td> " + j +" </td>");
+			}
+			System.out.println("</tr>");
+		}
+		System.out.println("</table>");
+
+		// 30. 1부터 45까지의 수 중 6개를 추출하여 출력하는 데 6개의 수를 5번 출력하시오.
+		for (int i = 1; i<=5; i++)
+		{
+			for (int j = 1 ;j<=6; j++) {
+				num = (int)(Math.random()*45)+1;
+				System.out.print(num + " ");
+			}
+			System.out.println("");
+		}
 		
 	}
 
