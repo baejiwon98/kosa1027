@@ -1,5 +1,5 @@
 
-public class E28 {
+public class Ex28 {
 
 	public static void main(String[] args) {
 		// 13. 1부터 10까지의 합을 구하시오.
