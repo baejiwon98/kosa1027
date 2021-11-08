@@ -31,7 +31,7 @@ public class Ex02 {
 		// score에 있는 값을 모두 더하시오.
 		int sum = 0;
 		for(int i = 0; i <= 9; i++) {
-			sum += d[i];
+			sum += score[i];
 		}
 		System.out.println(sum);
 	
