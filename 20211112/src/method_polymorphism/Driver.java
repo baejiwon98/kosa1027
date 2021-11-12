@@ -1,7 +1,7 @@
 package method_polymorphism;
 
 public class Driver {
-	public void dirve(Vehicle vehicle) {
+	public void drive(Vehicle vehicle) {
 		vehicle.run();
 	}
 }

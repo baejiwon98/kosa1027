@@ -23,5 +23,4 @@ public interface RemoteControl {
 	static void changeBattery() {
 		System.out.println("건전지를 교환합니다.");
 	}
-	void search(String url);
 }
