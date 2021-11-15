@@ -51,7 +51,6 @@ public class BoardTest {
 				System.out.print("보고 싶은 게시글의 번호를 입력하세요. : ");
 				int want = sc.nextInt();
 				for (int i = 0; i < board.length; i++) {
-					
 				}
 				break;	
 			}
