@@ -15,6 +15,6 @@ public class ThrowsExample {
 	public static void test() throws ArithmeticException { 
 		int i = 2;
 		int j = 0;
-		System.out.println(i / j);		
+		System.out.println(i / j);
 	}
 }
