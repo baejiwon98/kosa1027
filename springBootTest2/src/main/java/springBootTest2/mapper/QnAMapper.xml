@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "springBootTest2.mapper.QnAMapper">
+<sql id="baseColumns">
+	QNA_NUM, QNA_SUBJECT , QNA_CONTENT, QNA_REGI_DATE, VISIT_COUNT
+</sql>
+
+<sql id="maxNum">
+	select nvl(max(qna_num), 0) + 1 from qna
+</sql>
+
+<update id="qnaUpdate" parameterType="springBootTest2.domain.QnADTO">
+	update qna set QNA_SUBJECT = #{qnaSubject}, QNA_CONTENT = #{qnaContent}, QNA_REGI_DATE = #{qnaRegiDate}
+	where QNA_NUM = #{qnaNum}
+</update>
+
+<delete id="qnaDel" parameterType="int">
+	delete from qna
+	where QNA_NUM = #{qnaNum}
+</delete>
+
+<select id="selectOne" parameterType="Integer" resultType="springBootTest2.domain.QnADTO">
+	select QNA_NUM qnaNum, QNA_SUBJECT qnaSubject, QNA_CONTENT qnaContent, QNA_REGI_DATE qnaRegiDate, VISIT_COUNT visitCount
+	from qna
+	where QNA_NUM = #{qnaNum}
+</select>
+
+<update id="visitCount" parameterType="int">
+	update qna
+	set VISIT_COUNT = VISIT_COUNT +1 
+	where QNA_NUM = #{qnaNum}
+</update>
+
+<select id="selectAll" resultType="springBootTest2.domain.QnADTO">
+	select QNA_NUM qnaNum, QNA_SUBJECT qnaSubject, QNA_CONTENT qnaContent, QNA_REGI_DATE qnaRegiDate, VISIT_COUNT visitCount
+	from qna
+</select>
+
+<insert id = "qnaInsert" parameterType="springBootTest2.domain.QnADTO">
+	insert into qna( <include refid="baseColumns" /> ) values (( <include refid="maxNum" /> ), 
+	#{qnaSubject}, #{qnaContent}, #{qnaRegiDate}, 0)
+
+</insert>
+</mapper>

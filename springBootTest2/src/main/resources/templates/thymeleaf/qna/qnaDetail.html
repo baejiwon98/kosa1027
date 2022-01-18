@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="qnaModify" method="post">
+	<input type="hidden" name="qnaNum" th:value="${dto.qnaNum}" />
+	제목 : <input type="text" name="qnaSubject" th:value="${dto.qnaSubject}" /><br />
+	내용 : <textarea rows="6" cols="30" name = "qnaContent">[[${dto.qnaContent}]]</textarea><br />
+	등록일 : <input type = "date" name = "qnaRegiDate" th:value="${#dates.format(dto.qnaRegiDate,'yyyy-MM-dd')}"/><br />
+	<input type = "submit" name = "수정완료" id = "submit"/><br />
+</form>
+
+</body>
+</html>
