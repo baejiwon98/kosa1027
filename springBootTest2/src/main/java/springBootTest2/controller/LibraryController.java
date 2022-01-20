@@ -1,6 +1,7 @@
 package springBootTest2.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import springBootTest2.command.LibCommand;
+import springBootTest2.service.lib.FileDownLoadService;
 import springBootTest2.service.lib.LibDeleteService;
 import springBootTest2.service.lib.LibDetailService;
 import springBootTest2.service.lib.LibListService;
@@ -33,10 +35,20 @@ public class LibraryController {
 	LibUpdateService libUpdateService;
 	@Autowired
 	LibDeleteService libDeleteService ;
+	@Autowired
+	FileDownLoadService fileDownLoadService;
+	
+	@RequestMapping("fileDown")
+	public void fileDown(@RequestParam(value="sfile") String sfileName,
+			@RequestParam(value="ofile") String ofileName,
+			HttpServletRequest request, HttpServletResponse reponse) {
+		fileDownLoadService.fileDownLoad(sfileName, ofileName, request, reponse);
+	}	
 		
 	@RequestMapping("libDelete")
 	public String libDelete(LibCommand libCommand, 
 			HttpSession session,Model model) {
+		model.addAttribute("newLineChar",'\n');
 		String path = libDeleteService.execute(libCommand,session,model);
 		return path;
 	}
@@ -51,12 +63,14 @@ public class LibraryController {
 	public String libModify(@RequestParam(value="libNum") Integer libNum,
 			@RequestParam(value="libPw") String libPw, Model model,
 			HttpSession session) {
+		model.addAttribute("newLineChar",'\n');
 		String path = libModifyService.execute(libNum,libPw,model,session);
 		return path;
 	}
 	
 	@RequestMapping(value = "libDetail", method = RequestMethod.GET)
 	public String libDetail(@RequestParam(value = "num") Integer libNum, Model model) {
+		model.addAttribute("newLineChar",'\n');
 		libDetailService.execute(model, libNum);
 		return "thymeleaf/lib/libInfo";
 	}

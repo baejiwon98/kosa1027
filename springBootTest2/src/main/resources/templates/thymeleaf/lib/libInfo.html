@@ -17,12 +17,20 @@ $(function(){
 ip 주소 : [[${dto.ipAddr}]]<br />
 제목 : [[${dto.libSubject}]]<br />
 글쓴이 : [[${dto.libWriter}]]<br />
-내용 : [[${dto.libContent}]]<br />
+내용 : <span th:utext="${#strings.replace(
+					dto.libContent, newLineChar, '&lt;br /&gt;' )}"></span><br />
+					<!-- T(System).getProperty('line.separator') 오류생기는 경우 -->
 파일 : 
 <div th:each="file,idx : ${#strings.arraySplit(dto.originalFileName,'`')}">
+<!--  
 	<a th:href="|/lib/${#strings.arraySplit(dto.storeFileName, '`')[idx.index]}|">
-	[[${file}]]</a>
-	 
+	[[${file}]]</a> -->
+	<a th:href="@{fileDown(sfile=${#strings.arraySplit(dto.storeFileName, '`')[idx.index]},
+						 ofile=${file})}">[[${file}]]</a>
+	||
+	size : [[${#numbers.formatInteger(
+		#strings.arraySplit(dto.fileSize,'`')[idx.index],0,'COMMA'
+	)}]]Byte
 </div>
 <form action = "libModify" method="post" id= "frm">
 <input type="hidden" name = "libNum" th:value="${dto.libNum}" />
