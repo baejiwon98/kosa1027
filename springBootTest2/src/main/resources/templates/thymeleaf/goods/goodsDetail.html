@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+수정페이지<br />
+<form action = "goodsModify" method="post">
+	<input type="hidden" name="goodsNum" th:value="${dto.goodsNum}" />
+	<table>
+		<tr><td>제품이름</td>
+			<td><input type="text" name="goodsName" th:value= "${dto.goodsName}"></td>
+		</tr>
+		<tr><td>제조가격</td>
+			<td><input type="number" name="goodsPrice" min=1000 th:value= "${dto.goodsPrice}"></td>
+		</tr>
+		<tr><td>제조일</td>
+			<td><input type="date" name="goodsDate"  th:value= "${#dates.format(dto.goodsDate,'yyyy-MM-dd')}"></td>
+		</tr>
+		<tr><td>제품설명</td>
+			<td><textarea rows="6" cols="40" name="goodsContent">[[${dto.goodsContent}]]</textarea></td>
+		</tr>
+		<tr><td>수량</td>
+			<td><input type="number" name="goodsQty" min=1 th:value= "${dto.goodsQty}"></td>
+		</tr>
+		<tr><td>제조사</td>
+			<td><input type="text" name="goodsCompany"  th:value= "${dto.goodsCompany}"></td>
+		</tr>
+		<tr><th colspan=2>
+				<input type="submit" value="게시글 등록"> 
+				<input type="button" value="뒤로가기" onclick="javascript:history.back()" />
+			</th></tr>
+	</table>
+</form>
+</body>
+</html>

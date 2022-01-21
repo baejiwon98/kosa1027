@@ -29,15 +29,23 @@
 </th:block>
 
 <a href = "/board/boardList">자유 게시판</a>
+<a href = "/myboard/boardList">내가 만든 자유 게시판</a>
 
 <th:block th:if="${session.authInfo != null}">
 <!-- 로그인 되었을 때 --> |
-<a href = "/emp/employeeList">직원 리스트</a> | 
-<a href = "/goods/goodsList">상품 리스트</a> | 
-<a href = "/lib/libList">자료실</a> | 
+<a href = "/lib/libList">자료실</a> |
 <a href = "/qna/qnaList">QnA 목록</a> |
-<a href = "/mem/memberList">회원 리스트</a> | 
-<a href = "/membership/memInfo">내정보 보기</a> | 
+<span th:switch="${session.authInfo.grade}">
+	<span th:case="emp">
+		<a href = "/mem/memberList">회원 리스트</a> | 
+		<a href = "/emp/employeeList">직원 리스트</a> | 
+		<a href = "/goods/goodsList">상품 리스트</a> | 
+		<a href = "/emplib/emplibList">직원 자료실</a> |
+	</span>
+	<span th:case="mem">
+		<a href = "/membership/memInfo">내정보 보기</a> | 
+	</span>
+</span>
 <a href = "/logout">로그아웃</a>
 </th:block>
 </body>

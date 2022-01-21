@@ -14,7 +14,7 @@ import springBootTest2.mapper.GoodsMapper;
 
 @Component
 @Service
-public class GoodsWriteService {
+public class GoodsModifyService {
 	@Autowired
 	GoodsMapper goodsMapper;
 	public void execute(GoodsCommand goodsCommand, HttpServletRequest request) {
@@ -26,7 +26,8 @@ public class GoodsWriteService {
 		dto.setEmpId(authInfo.getUserId());
 		
 		dto.setEmpNum(goodsMapper.empnumGenerate(dto));
-		dto.setGoodsNum(goodsMapper.numberGenerate());
+		System.out.println(goodsCommand.getEmpNum());
+		dto.setGoodsNum(goodsCommand.getGoodsNum());
 		dto.setGoodsCompany(goodsCommand.getGoodsCompany());
 		dto.setGoodsContent(goodsCommand.getGoodsContent());
 		dto.setGoodsDate(goodsCommand.getGoodsDate());
@@ -34,6 +35,6 @@ public class GoodsWriteService {
 		dto.setGoodsPrice(goodsCommand.getGoodsPrice());
 		dto.setGoodsQty(goodsCommand.getGoodsQty());
 		
-		goodsMapper.goodsInsert(dto);
+		goodsMapper.goodsUpdate(dto);
 	}
 }

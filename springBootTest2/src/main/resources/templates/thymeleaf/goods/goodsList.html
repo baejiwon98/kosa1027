@@ -6,6 +6,16 @@
 </head>
 <body>
 상품리스트 <br />
+<table border = 1 width = "600px">
+	<tr><th>제품번호</th><th>제품이름</th><th>제조가격</th><th>수량</th></tr>
+	<th:block th:each=" dto : ${list}">
+		<tr><td><a th:href="@{goodsDetail(num=${dto.goodsNum })}">[[${dto.goodsNum }]]</a></td>
+			<td><a th:href="@{goodsDetail(num=${dto.goodsNum })}">[[${dto.goodsName }]]</a></td>
+			<td>[[${dto.goodsPrice }]]</td>
+			<td>[[${dto.goodsQty }]]</td>
+		</tr>
+	</th:block>
+</table>
 <a href="goodsWrite">상품등록</a>
 </body>
 </html>
