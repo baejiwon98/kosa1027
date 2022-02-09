@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "kosaShoppingMall.mapper.GoodsMapper">
+
+<delete id="goodsIpgoDels" parameterType="hashMap">
+	delete from goodsIpgo
+	<where>
+	(goods_num, ipgo_date) in
+	<foreach collection="condition" item="nums" index="index" open="(" close=")" separator=",">
+		<foreach collection="nums" item="num" index="index" open="(" close=")" separator=",">
+			#{num}
+		</foreach>
+	</foreach>
+	</where>
+</delete>
+
+<delete id="goodsRemove" parameterType="hashMap">
+	delete from goods 
+	<where>
+	goods_num in
+	<foreach collection="goodsNums" item="goodsNum" index="index" open="(" close=")" separator=",">
+		#{goodsNum}
+	</foreach>
+	</where>
+</delete>
+
+<delete id="goodsDeletes" parameterType="hashMap">
+	delete from goods 
+	<where>
+	goods_num in
+	<foreach collection="cs" item="goodsNum" index="index" open="(" close=")" separator=",">
+		#{goodsNum}
+	</foreach>
+	</where>
+</delete>
+
+<delete id="goodsDels" parameterType="hashMap">
+	delete from goods 
+	<where>
+	goods_num in
+	<foreach collection="deletes" item="goodsNum" index="index" open="(" close=")" separator=",">
+		#{goodsNum}
+	</foreach>
+	</where>
+</delete>
+
+<resultMap type="kosaShoppingMall.domain.GoodsIpgoGoodsDTO" id="goodsIpgoGoodsMap">
+   <association property="goodsDTO" javaType="kosaShoppingMall.domain.GoodsDTO">
+      <id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
+      <result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName"/>
+      <result column="GOODS_PRICE" jdbcType="BIGINT" property="goodsPrice"/>
+      <result column="goods_content" jdbcType="VARCHAR" property="goodsContent"/>
+      <result column="delivery_cost" jdbcType="BIGINT" property="deliveryCost"/>
+      <result column="visit_count" jdbcType="BIGINT" property="visitCount"/>
+   </association>
+   <association property="goodsIpgoDTO" javaType="kosaShoppingMall.domain.GoodsIpgoDTO">
+      <id column="goods_num" jdbcType="VARCHAR" property="goodsNum"/>
+      <id column="ipgo_date" jdbcType="DATE" property="ipgoDate"/>
+      <result column="ipgo_qty" jdbcType="BIGINT" property="ipgoQty"/>
+      <result column="made_date" jdbcType="TIMESTAMP" property="madeDate"/>
+   </association>
+</resultMap>
+
+<resultMap type="kosaShoppingMall.domain.GoodsDTO" id="goodsIpgoGoodsResultMap">
+   <id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
+   <result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName"/>
+   <result column="GOODS_PRICE" jdbcType="BIGINT" property="goodsPrice"/>
+   <result column="goods_content" jdbcType="VARCHAR" property="goodsContent"/>
+   <result column="delivery_cost" jdbcType="BIGINT" property="deliveryCost"/>
+   <result column="visit_count" jdbcType="BIGINT" property="visitCount"/>
+   <association property="goodsIpgoDTO" javaType="kosaShoppingMall.domain.GoodsIpgoDTO">
+      <id column="goods_num" jdbcType="VARCHAR" property="goodsNum"/>
+      <id column="ipgo_date" jdbcType="DATE" property="ipgoDate"/>
+      <result column="ipgo_qty" jdbcType="BIGINT" property="ipgoQty"/>
+      <result column="made_date" jdbcType="TIMESTAMP" property="madeDate"/>
+   </association>
+</resultMap>
+
+<delete id="goodsIpgoDelete" parameterType="String">
+delete from goodsipgo where goods_num = #{goodsNum}
+</delete>
+
+<update id="goodsIpgoUpdate" parameterType="goodsIpgoDTO">
+	update goodsipgo set goods_num = #{goodsNum} , ipgo_date = #{ipgoDate}, 
+	ipgo_qty = #{ipgoQty}, made_date = #{madeDate} where goods_num = #{goodsNum} and ipgo_date = #{ipgoDate}
+</update>
+
+<select id="ipgoDetail" parameterType="goodsIpgoDTO" resultMap="goodsIpgoGoodsMap">
+	select g.goods_num, g.goods_name, g.goods_price, g.goods_content, 
+			g.delivery_cost, g.visit_count, 
+			i.ipgo_date, i.ipgo_qty, made_date
+	from goods g, goodsipgo i
+	where g.goods_num = i.goods_num and g.goods_num = #{goodsNum} 
+									and i.ipgo_date= #{ipgoDate}
+</select>
+
+<select id="getGoodsIpgoInfo" parameterType="goodsIpgoDTO" resultMap="goodsIpgoGoodsResultMap">
+	select g.goods_num, g.goods_name, g.goods_price, g.goods_content, 
+			g.delivery_cost, g.visit_count, 
+			i.ipgo_date, i.ipgo_qty, made_date
+	from goods g, goodsipgo i
+	where g.goods_num = i.goods_num and g.goods_num = #{goodsNum} 
+									and i.ipgo_date= #{ipgoDate}
+</select>
+
+<select id="ipgoSelect" resultType="goodsIpgoDTO">
+	select ipgo_date ipgoDate, goods_num goodsNum, ipgo_qty ipgoQty, made_date madeDate 
+	from goodsipgo
+	order by goods_num desc, ipgo_date desc
+</select>
+
+<insert id="ipgoInsert" parameterType="goodsIpgoDTO">
+	insert into goodsipgo (IPGO_DATE, GOODS_NUM, IPGO_QTY, MADE_DATE)
+	values(#{ipgoDate}, #{goodsNum}, #{ipgoQty}, #{madeDate})
+</insert>
+
+<select id="goodsItems" parameterType="string" resultType="kosaShoppingMall.domain.GoodsDTO">
+	select goods_num goodsNum , goods_name goodsName, goods_price goodsPrice, goods_content goodsContent, 
+	delivery_cost deliveryCost, visit_count visitCount from goods
+	where goods_name like '%'||#{goodsName}||'%'
+</select>
+
+<select id="searchGoods" parameterType="string" resultType="kosaShoppingMall.domain.GoodsDTO">
+	select goods_num goodsNum , goods_name goodsName, goods_price goodsPrice, goods_content goodsContent, 
+	delivery_cost deliveryCost, visit_count visitCount from goods
+	<if test="goodsWord != null">
+	where goods_name like '%'||#{goodsWord}||'%'
+		or goods_content like '%'||#{goodsWord}||'%'
+	</if>
+</select>
+
+<delete id="goodsDelete" parameterType="String">
+delete from goods where goods_num = #{goodsNum}
+</delete>
+
+<update id="goodsUpdate" parameterType="kosaShoppingMall.domain.GoodsDTO">
+	update goods set goods_num = #{goodsNum} , goods_name = #{goodsName}, goods_price = #{goodsPrice},
+	 goods_content = #{goodsContent},  delivery_cost = #{deliveryCost}, visit_count = #{visitCount} where goods_num = #{goodsNum}
+
+</update>
+
+<select id="selectOne" resultType="kosaShoppingMall.domain.GoodsDTO">
+	select goods_num goodsNum , goods_name goodsName, goods_price goodsPrice, goods_content goodsContent, 
+	delivery_cost deliveryCost, visit_count visitCount from goods where goods_num = #{goodsNum}
+</select>
+
+<select id="selectAll" resultType="kosaShoppingMall.domain.GoodsDTO">
+	select goods_num goodsNum , goods_name goodsName, goods_price goodsPrice, goods_content goodsContent, 
+	delivery_cost deliveryCost, visit_count visitCount from goods
+</select>
+
+<update id="visitCount" parameterType="String">
+	update goods
+	set VISIT_COUNT = VISIT_COUNT +1 
+	where goods_NUM = #{goodsNum}
+</update>
+
+<insert id="goodsInsert" parameterType="kosaShoppingMall.domain.GoodsDTO">
+	insert into goods( goods_num, goods_name, goods_price, goods_content,  delivery_cost, visit_count ) values 
+	( #{goodsNum}, #{goodsName}, #{goodsPrice}, #{goodsContent},  #{deliveryCost} , 0)
+</insert>
+
+<select id = "numberGenerate" resultType="string">
+select concat('goods', nvl(max(substr(goods_num,6)),10000) + 1) from goods
+</select>
+
+</mapper>

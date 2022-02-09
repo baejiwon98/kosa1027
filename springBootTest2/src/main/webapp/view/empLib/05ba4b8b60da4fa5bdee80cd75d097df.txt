@@ -1,0 +1,7 @@
+jsp					Spring + Mybatis
+FrontController				Controller
+Controller				Service
+DAO					Repository + mapper
+DTO/VO					DTO/VO
+
+maven, gradle 

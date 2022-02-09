@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+직원 리스트 <br />
+사원수 : [[${list.size()}]]
+<form action="empDels" method="post">
+<table border = 1 width="600">
+	<tr><th>번호</th><th>직원아이디</th><th>직원이름</th><th>주소</th><th>핸드폰번호</th>
+	<th><input type="submit" value="삭제" /></th></tr>
+	<th:block th:each = "dto , idx :${list}">
+	<tr><th>[[${idx.count}]]</th>
+		<th><a th:href="@{employeeInfo(Id=${dto.empId})}">[[${dto.empId}]]</a></th>
+		<th>[[${dto.empName}]]</th>
+		<th><a th:href="@{employeeInfo(Id=${dto.empId})}">[[${dto.empAddr}]]</a></th>
+		<th>[[${dto.empPhone}]]</th>
+		<th><input type="checkbox" th:value="${dto.empId}" name="delete"/></th>
+		</tr>
+	</th:block>	
+</table>
+</form>
+<a href = "empJoin">직원등록</a>
+</body>
+</html>

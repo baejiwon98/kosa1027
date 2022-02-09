@@ -22,4 +22,8 @@ public class MemberCommand {
 	String memNum;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date memRegiDate;
+	
+	public boolean isMemPwEqualsMemPwCon() {
+		return memPw.equals(memPwCon);
+	}
 }

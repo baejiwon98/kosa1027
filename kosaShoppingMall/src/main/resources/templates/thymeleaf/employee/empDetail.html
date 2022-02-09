@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+<script>
+$(function(){
+	$("#update").click(function(){
+		$.ajax({
+			type : "post",
+			url : "empDelete",
+			data : {"empId":"[[${employeeCommand.empId}]]",
+				"empPw" : $("#empPw").val()},
+			dataType: "text",
+			success: function(result) {
+				alert(result);
+				if(result.trim() == '1'){
+					alert("회원이 정상적으로 삭제되었습니다.");
+					location.href="empList";
+				}else{
+					alert("회원이 삭제되지않았습니다.");
+					return false;
+				}
+			},
+			error: function(){
+				alert('에러가 나왔음');
+				return;
+			}
+		});
+	});
+});
+function del(){
+	$.ajax({
+		type : "post",
+		url : "empDelete",
+		data : {"empId":"[[${employeeCommand.empId}]]",
+				"empPw" : $("#empPw").val()},
+		dataType: "text",
+		success: function(result) {
+			alert(result);
+			if(result.trim() == '1'){
+				alert("회원이 정상적으로 삭제되었습니다.");
+				location.href="empList";
+			}else{
+				alert("회원이 삭제되지않았습니다.");
+				return false;
+			}
+		},
+		error: function(){
+			alert('에러가 나왔음');
+			return;
+		}
+	});
+}
+
+
+
+</script>
+</head>
+<body>
+상세페이지<br />
+아이디 : [[${employeeCommand.empId}]]<br />
+이름 : [[${employeeCommand.empName}]]<br />
+주소 : [[${employeeCommand.empAddr}]]<br />
+핸드폰번호 : [[${employeeCommand.empPhone}]]<br />
+이메일 : [[${employeeCommand.empEmail}]]
+<form action = "empModify" method="post" id= "frm">
+<input type="hidden" name = "Id" th:value="${employeeCommand.empId}" />
+비밀번호 : <input type = "password" name="empPw" id="empPw" required = "required"  />
+<span th:if="${err_pw != null}" th:text="${err_pw}" style = "color:red"></span>
+<br />
+<input type="submit" value="수정"/>
+<input type="button" value="삭제"  id="update"/>
+<input type="button" value="function삭제" onclick="del();">
+</form>
+<a href="empList">게시글 리스트</a> 
+</body>
+</html>

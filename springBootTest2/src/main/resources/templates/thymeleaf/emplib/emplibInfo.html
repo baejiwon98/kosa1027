@@ -21,8 +21,25 @@ $(function(){
 <form action = "emplibModify" method="post" id= "frm">
 <input type="hidden" name = "libNum" th:value="${dto.libNum}" />
 게시글 비밀번호 : <input type = "password" name="libPw" id="libPw" required = "required" />
-<span th:if="${err_pw != null}" th:text="${err_pw}" style = "color:red"></span>
-<br />
+<span th:if="${err_pw != null}" th:text="${err_pw}" style = "color:red"></span><br />
+파일 : <br />
+[[${dto.originalFileName}]]<br />
+[[${dto.storeFileName}]]<br />
+[[${dto.fileSize}]]<br />
+<div th:each="file,idx : ${#strings.arraySplit(dto.originalFileName, '`')}">
+	<!-- 
+	<a th:href="|/empLib/${#strings.arraySplit(dto.storeFileName, '`')[idx.index ]}|">
+	[[${file }]]
+	</a> |  -->
+	
+	<a th:href = "@{fileDown(sfile=${#strings.arraySplit(dto.storeFileName,'`')[idx.index]}, ofile=${file})}">[[${file}]]</a>
+	
+	<!--  -->
+	[[${#strings.arraySplit(dto.storeFileName, '`')[idx.index] }]] | 
+	[[${#strings.arraySplit(dto.fileSize, '`')[idx.index ]}]] Byte | 
+	[[${#numbers.formatInteger(#strings.arraySplit(dto.fileSize, '`')[idx.index ], 0, 'COMMA')}]]
+</div>
+
 <input type="submit" value="수정"/>
 <input type="button" value="삭제"  id="update"/>
 </form>

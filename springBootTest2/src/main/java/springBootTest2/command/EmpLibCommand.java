@@ -1,5 +1,7 @@
 package springBootTest2.command;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -12,4 +14,5 @@ public class EmpLibCommand {
 	String ipAddr;
 	String libPw;
 	String empId;
+	MultipartFile [] report;
 }

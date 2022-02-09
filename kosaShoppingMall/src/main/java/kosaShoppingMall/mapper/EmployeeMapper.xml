@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "kosaShoppingMall.mapper.EmployeeMapper">
+
+<delete id="empDels" parameterType="hashMap">
+	delete from employees where emp_id in
+	<foreach collection="deletes" item="empId" index="index" open="(" close=")" separator=",">
+		#{empId}
+	</foreach>
+</delete>
+
+<delete id="empDelete" parameterType="String">
+	delete from employees where emp_id = #{empId}
+</delete>
+
+<update id="employeeUpdate" parameterType="kosaShoppingMall.domain.EmployeeDTO">
+	update employees set emp_id = #{empId}, emp_pw = #{empPw}, emp_name = #{empName},
+	 emp_addr = #{empAddr}, emp_phone = #{empPhone}, emp_email = #{empEmail} where emp_id = #{empId}
+</update>
+
+<select id="selectOne" parameterType="String" resultType="kosaShoppingMall.domain.EmployeeDTO">
+	select emp_id empId, emp_pw empPw, emp_name empName,
+	 emp_addr empAddr, emp_phone empPhone, emp_email empEmail from employees where emp_id = #{empId}
+</select>
+
+<select id="selectAll" resultType="kosaShoppingMall.domain.EmployeeDTO">
+	select emp_id empId, emp_pw empPw, emp_name empName,
+	 emp_addr empAddr, emp_phone empPhone, emp_email empEmail from employees
+</select>
+
+<insert id="employeeInsert" parameterType="kosaShoppingMall.domain.EmployeeDTO">
+	insert into employees( emp_id, emp_pw, emp_name, emp_addr, emp_phone, emp_email ) values 
+	( #{empId}, #{empPw}, #{empName}, #{empAddr}, #{empPhone}, #{empEmail} )
+</insert>
+
+</mapper>

@@ -12,4 +12,7 @@ public class EmpLibDTO {
 	String ipAddr;
 	String libPw;
 	String empId;
+	String originalFileName;
+	String storeFileName;
+	String fileSize;
 }

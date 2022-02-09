@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>입고</title>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#btn").click(function(){
+		window.open("goodsItem", "goodsItem", "width=620, height=500, left=100, top=100");
+	});
+});
+</script>
+<style type="text/css">
+#leftMenu {
+    float:left;
+    margin-right:50px;
+    height : 500px;
+}
+#GoodsInfo {
+	float:left;
+	padding:15px;
+	padding-left:50px;
+	border-left:1px solid gray;
+	height : 500px;
+}
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+</style>
+</head>
+<body>
+<div id="leftMenu">
+	<ul>
+		<li><a href="goodsList">상품리스트</a></li>
+		<li><a href="goodsRegist">상품등록</a></li>
+		<li><a href="goodsIpgoList">상품 입고 현황</a></li>
+		<li><a href="goodsIpgo">상품입고</a></li>
+	</ul>
+</div>
+
+<div id ="GoodsInfo">
+<h2>상품 입고 등록</h2>
+<form action="ipgoRegist" method="post" th:object="${goodsIpgoCommand}">
+	<table>
+		<tr><th>상품번호</th>
+			<td><input type="text" name="goodsNum" id="num" th:value="${goodsIpgoCommand.goodsNum}" readonly="readonly" />
+			<button type="button" id="btn">상품 번호 검색</button><br />
+			<span th:if="${#fields.hasErrors('goodsNum')}" th:errors="*{goodsNum}"></span>
+			</td>
+		</tr>
+		<tr><th>입고일</th>
+			<td><input type="date" name="ipgoDate" th:value="${#dates.format(goodsIpgoCommand.ipgoDate, 'yyyy-MM-dd')}" /><br />
+			<span th:if="${#fields.hasErrors('ipgoDate')}" th:errors="*{ipgoDate}"></span></td>
+		</tr>
+		<tr><th>입고 수량</th>
+			<td><input type="number" name="ipgoQty" min=1 th:value="${goodsIpgoCommand.ipgoQty}"/><br />
+			<span th:if="${#fields.hasErrors('ipgoQty')}" th:errors="*{ipgoQty}"></span></td>
+		</tr>
+		<tr><th>제조일</th>
+			<td><input type="datetime-local" name="madeDate" th:value="${goodsIpgoCommand.madeDate}"/><br />
+			<span th:if="${#fields.hasErrors('madeDate')}" th:errors="*{madeDate}"></span></td>
+		</tr>
+		<tr><th colspan="2">
+				<input type="submit" value="등록" />
+			</th>
+		</tr>
+	</table>
+</form>
+</div>
+</body>
+</html>

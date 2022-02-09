@@ -3,8 +3,8 @@ package springBootTest2.service.member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
+import springBootTest2.command.MemberCommand;
 import springBootTest2.mapper.MemberMapper;
 
 @Component
@@ -12,9 +12,10 @@ import springBootTest2.mapper.MemberMapper;
 public class MemberNumberService {
 	@Autowired
 	MemberMapper memberMapper;
-	public void execute(Model model) {
+	public void execute(MemberCommand memberCommand) {
 		String memberNum = memberMapper.numberGenerate();
-		model.addAttribute("memberNum", memberNum);
+//		model.addAttribute("memberNum", memberNum);
+		memberCommand.setMemNum(memberNum);
 	}
 
 }

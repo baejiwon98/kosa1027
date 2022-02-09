@@ -1,6 +1,7 @@
 package springBootTest2.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,8 +50,8 @@ public class GoodsController {
 	}
 	
 	@RequestMapping(value="goodsDel", method = RequestMethod.GET)
-	public String goodsDel(@RequestParam(value="num") String goodsNum) {
-		goodsDelService.execute(goodsNum);
+	public String goodsDel(GoodsCommand goodsCommand, HttpSession session, Model model) {
+		goodsDelService.execute(goodsCommand, session, model);
 		return "redirect:goodsList";
 	}
 	

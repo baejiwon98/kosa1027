@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#leftMenu {
+    float:left;
+    margin-right:50px;
+    height : 500px;
+}
+#GoodsInfo {
+	float:left;
+	padding:15px;
+	padding-left:50px;
+	border-left:1px solid gray;
+	height : 500px;
+}
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+</style>
+</head>
+<body>
+<div id="leftMenu">
+	<ul>
+		<li><a href="goodsList">상품리스트</a></li>
+		<li><a href="goodsRegist">상품등록</a></li>
+		<li><a href="goodsIpgoList">상품 입고 현황</a></li>
+		<li><a href="goodsIpgo">상품입고</a></li>
+	</ul>
+</div>
+
+<div id ="GoodsInfo">
+상품수정수정수정쓰<br />
+<form action="goodsUpdate" method="post" name="frm" id="frm" th:object="${goodsCommand}">
+<table>
+	<tr><th>제품 번호</th>
+		<td><input type="text" name="goodsNum" th:value="${goodsCommand.goodsNum}" readonly="readonly"/>: 자동 부여
+		</td>
+		<td th:if="${#fields.hasErrors('goodsNum')}" th:errors="*{goodsNum}"></td>
+	</tr>
+	<tr>
+		<th>상품명</th>
+		<td><input type="text" name="goodsName" th:value="${goodsCommand.goodsName}"/></td>
+		<td th:if="${#fields.hasErrors('goodsName')}" th:errors="*{goodsName}"></td>
+	</tr>
+	<tr>
+		<th>상품가격</th>
+		<td><input type="number" name="goodsPrice" min="1000" step="1000" value="1000" th:value="${goodsCommand.goodsPrice}"/></td>
+		<td th:if="${#fields.hasErrors('goodsPrice')}" th:errors="*{goodsPrice}"></td>
+	</tr>
+	<tr>
+		<th>상품내용</th>
+		<td><textarea rows="6" cols="30" name="goodsContent">[[${goodsCommand.goodsContent}]]</textarea></td>
+		<td th:if="${#fields.hasErrors('goodsContent')}" th:errors="*{goodsContent}"></td>
+	</tr>
+	<tr>
+		<th>배송비</th>
+		<td><input type="number" name="deliveryCost" min="2000" step="500" value="2000" th:value="${goodsCommand.deliveryCost}"/></td>
+		<td th:if="${#fields.hasErrors('deliveryCost')}" th:errors="*{deliveryCost}"></td>
+	</tr>
+	<tr>
+		<th colspan="2">
+			<input type="submit" value="수정완료" />
+			<input type="reset" value="다시 작성" />
+			<input type="button" value="상품리스트" onclick="javascript:location.href='goodsList'" />
+		</th>
+	</tr>
+</table>
+</form>
+</div>
+</body>
+</html>

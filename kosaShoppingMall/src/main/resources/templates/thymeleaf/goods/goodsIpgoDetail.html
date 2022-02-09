@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#leftMenu {
+    float:left;
+    margin-right:50px;
+    height : 500px;
+}
+#GoodsInfo {
+	float:left;
+	padding:15px;
+	padding-left:50px;
+	border-left:1px solid gray;
+	height : 500px;
+}
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+</style>
+</head>
+<body>
+<div id="leftMenu">
+	<ul>
+		<li><a href="goodsList">상품리스트</a></li>
+		<li><a href="goodsRegist">상품등록</a></li>
+		<li><a href="goodsIpgoList">상품 입고 현황</a></li>
+		<li><a href="goodsIpgo">상품입고</a></li>
+	</ul>
+</div>
+
+<div id ="GoodsInfo">
+<h2>입고현황상세하게상세보기</h2>
+제품번호 : [[${goodsIpgoGoodsCommand.GoodsDTO.goodsNum}]]<br />
+제품명 : [[${goodsIpgoGoodsCommand.GoodsDTO.goodsName}]]<br />
+가격 : [[${goodsIpgoGoodsCommand.GoodsDTO.goodsPrice}]]<br />
+내용 : [[${goodsIpgoGoodsCommand.GoodsDTO.goodsContent}]]<br />
+배송비 : [[${goodsIpgoGoodsCommand.GoodsDTO.deliveryCost}]]<br />
+조회수 : [[${goodsIpgoGoodsCommand.GoodsDTO.visitCount}]]<br />
+입고일 : [[${goodsIpgoGoodsCommand.goodsIpgoDTO.ipgoDate}]]<br />
+입고 수량 : [[${goodsIpgoGoodsCommand.goodsIpgoDTO.ipgoQty}]]<br />
+제조일 : [[${goodsIpgoGoodsCommand.goodsIpgoDTO.madeDate}]]<br />
+
+<a th:href="@{goodsIpgoModify(goodsNum=${goodsIpgoGoodsCommand.goodsDTO.goodsNum},
+ipgoDate=${#dates.format(goodsIpgoGoodsCommand.goodsIpgoDTO.ipgoDate, 'yyyy-MM-dd')})}">수정</a>
+<a th:href="@{goodsIpgoDelete(goodsNum=${goodsIpgoGoodsCommand.goodsDTO.goodsNum},
+ipgoDate=${#dates.format(goodsIpgoGoodsCommand.goodsIpgoDTO.ipgoDate, 'yyyy-MM-dd')})}">삭제</a>
+</div>
+</body>
+</html>

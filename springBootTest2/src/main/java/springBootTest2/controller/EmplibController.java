@@ -1,6 +1,7 @@
 package springBootTest2.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import springBootTest2.service.emplib.EmpLibListService;
 import springBootTest2.service.emplib.EmpLibModifyService;
 import springBootTest2.service.emplib.EmpLibUpdateService;
 import springBootTest2.service.emplib.EmpLibWriteService;
+import springBootTest2.service.emplib.FileDownService;
 
 @Controller
 @RequestMapping("emplib")
@@ -36,6 +38,13 @@ public class EmplibController {
 	EmpLibModifyService empLibModifyService;
 	@Autowired
 	EmpLibUpdateService empLibUpdateService;
+	@Autowired
+	FileDownService fileDownService;
+	
+	@RequestMapping("fileDown")
+	public void fileDown(@RequestParam("sfile") String sfile, @RequestParam("ofile") String ofile, HttpServletRequest request, HttpServletResponse response) {
+		fileDownService.execute(sfile, ofile, request, response);
+	}
 	
 	@RequestMapping(value ="emplibUpdate", method=RequestMethod.POST)
 	public String emplibUpdate(EmpLibCommand emplibCommand, HttpSession session, Model model, HttpServletRequest request) {

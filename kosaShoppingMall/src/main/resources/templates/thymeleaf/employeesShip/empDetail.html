@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#leftMenu {
+    float:left;
+    margin-right:50px;
+    height : 500px;
+}
+#empInfo {
+	float:left;
+	padding:15px;
+	padding-left:50px;
+	border-left:1px solid gray;
+	height : 500px;
+}
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+</style>
+</head>
+<body>
+<div id="leftMenu">
+	<ul>
+		<li><a href="empDetail">내 정보 보기</a></li>
+		<li><a href="empModify">내 정보 수정</a></li>
+		<li><a href="empPwUpdate">비밀번호 수정</a></li>
+	</ul>
+</div>
+
+<div id ="empInfo">
+내 정보 보기<br />
+아이디 : [[${employeeCommand.empId}]]<br />
+이름 : [[${employeeCommand.empName}]]<br />
+주소 : [[${employeeCommand.empAddr}]]<br />
+핸드폰번호 : [[${employeeCommand.empPhone}]]<br />
+이메일 : [[${employeeCommand.empEmail}]]
+</div>
+</body>
+</html>

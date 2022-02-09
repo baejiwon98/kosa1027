@@ -3,6 +3,9 @@ package springBootTest2.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +37,11 @@ public class MemberController {
  	@Autowired
  	MemberNumberService memberNumberService;
  	
+ 	@ModelAttribute
+ 	MemberCommand setMemberCommand() {
+ 		return new MemberCommand();
+ 	}
+ 	
  	@RequestMapping("memberUpdate")
  	public String memberUpdateOk(MemberCommand memberCommand) {
  		memberUpdateService.execute(memberCommand);
@@ -64,14 +72,21 @@ public class MemberController {
 		return "thymeleaf/member/memberList";
 	}
 	
-	@RequestMapping("memberRegist")
-	public String memberRegist(Model model) {
-		memberNumberService.execute(model);
+	@RequestMapping(value = "memberRegist", method = RequestMethod.GET)
+	public String memberRegist(MemberCommand memberCommand) {
+		memberNumberService.execute(memberCommand);
 		return "thymeleaf/member/memberForm";
 	}
 	
-	@RequestMapping("memberWrite")
-	public String memberWrite(MemberCommand memberCommand) {
+	@RequestMapping(value = "memberWrite", method = RequestMethod.POST)
+	public String memberWrite(@Validated MemberCommand memberCommand, BindingResult result) {
+		if(result.hasErrors()) {
+			return "thymeleaf/member/memberForm";
+		}
+		if(!memberCommand.isMemPwEqualsMemPwCon()) {
+			result.rejectValue("memPw", "memberCommand.memPw", "비밀번호 확인이 다릅니다.");
+			return "thymeleaf/member/memberForm";
+		}
 		memberRegistService.execute(memberCommand);
 		return "redirect:memberList";
 	}

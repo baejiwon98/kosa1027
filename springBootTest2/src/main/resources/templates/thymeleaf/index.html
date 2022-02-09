@@ -20,7 +20,7 @@
 		<input type="image" th:src="@{/static/images/img1.jpg}" width="80" height="80" id="imgSubmit"/>
 	</td></tr>
 <tr><td><input type = "password" name = "pw" placeholder="비밀번호">
-	<span th:if="${err_pw != null}" th:text="${err_pw}" style="color:red"></td></tr>
+	<span th:if="${err_pw != null}" th:text="${err_pw}" style="color:red"></span></td></tr>
 <tr><td colspan=2>
 	아이디/비밀번호 찾기 | <a href = "/membership/memberAgree">회원가입</a>
 	</td></tr>
@@ -28,9 +28,10 @@
 </form>
 </th:block>
 
-<a href = "/board/boardList">자유 게시판</a>
-<a href = "/myboard/boardList">내가 만든 자유 게시판</a>
-
+<a href = "/board/boardList">자유 게시판</a> | 
+<a href = "/myboard/boardList">내가 만든 자유 게시판</a> |
+<a href = "/ajax/ajax1">ajax</a> |
+<a href = "/ajax/ajax3">ajax1</a> |
 <th:block th:if="${session.authInfo != null}">
 <!-- 로그인 되었을 때 --> |
 <a href = "/lib/libList">자료실</a> |

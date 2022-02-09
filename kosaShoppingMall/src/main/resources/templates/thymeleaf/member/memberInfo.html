@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#leftMenu {
+    float:left;
+    margin-right:50px;
+    height : 500px;
+}
+#MemberInfo {
+	float:left;
+	padding:15px;
+	padding-left:50px;
+	border-left:1px solid gray;
+	height : 500px;
+}
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+</style>
+</head>
+<body>
+<div id="leftMenu">
+	<ul>
+		<li><a href="memberDetail">내 정보 보기</a></li>
+		<li><a href="memberPw">내 정보 수정</a></li>
+		<li><a href="memberPwForm">비밀번호 수정</a></li>
+		<li><a href="memberUserDel">회원 탈퇴</a></li>
+	</ul>
+</div>
+
+<div id ="MemberInfo">
+내 정보 보기!~!~!~<br />
+회원번호 : [[${memberCommand.memNum}]]<br />
+회원아이디 : [[${memberCommand.memId}]]<br />
+회원이름 : [[${memberCommand.memName}]]<br />
+회원주소 : [[${memberCommand.memAddr}]]<br />
+등록일 : <span th:text="${#dates.format(memberCommand.memRegiDate, 'yyyy-MM-dd') }"></span><br />
+성별 : <span th:if="${memberCommand.memGender == 'M'}" th:text="남자"></span>
+<span th:if="${memberCommand.memGender == 'F'}" th:text="여자"></span><br />
+연락처 : [[${memberCommand.memPhone}]]<br />
+생년월일 : <span th:text="${#dates.format(memberCommand.memBirth, 'yyyy-MM-dd') }"></span><br />
+회원이메일 : [[${memberCommand.memEmail}]] <br />
+</div>
+</body>
+</html>

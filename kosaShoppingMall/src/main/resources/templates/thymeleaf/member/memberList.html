@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+회원관리이얏호~!<br />
+회원수 : [[${list.size()}]]
+<form action="memberDels" method="post">
+<table border = 1 width="600">
+	<tr><th>번호</th><th>회원번호</th><th>회원이름</th><th>회원아이디</th><th>핸드폰번호</th>
+		<th><input type="submit" value="삭제" /></th></tr>
+	<th:block th:each = "dto, idx :${list}">
+	<tr>
+		<th>[[${idx.count}]]</th>
+		<th><a th:href="|memberInfo/${dto.memNum}|">[[${dto.memNum}]]</a></th>
+		<th>[[${dto.memName}]]</th>
+		<th><a th:href="|memberInfo/${dto.memNum}|">[[${dto.memId}]]</a></th>
+		<th>[[${dto.memPhone}]]</th>
+		<th><input type="checkbox" th:value="${dto.memNum}" name="delete"></th></tr>
+	</th:block>	
+</table>
+</form>
+<a href="memberRegist">회원등록</a>
+</body>
+</html>

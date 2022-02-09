@@ -6,9 +6,9 @@
 
 <insert id="goodsInsert" parameterType="springBootTest2.domain.GoodsDTO">
 insert into goods(GOODS_NUM, GOODS_NAME, GOODS_PRICE, GOODS_DATE, 
-GOODS_CONTENT, GOODS_QTY, GOODS_COMPANY, EMP_NUM) 
+GOODS_CONTENT, GOODS_QTY, GOODS_COMPANY, EMP_NUM, GOODS_IMAGE) 
 values(#{goodsNum}, #{goodsName}, #{goodsPrice}, #{goodsDate}, 
-#{goodsContent}, #{goodsQty}, #{goodsCompany}, #{empNum})
+#{goodsContent}, #{goodsQty}, #{goodsCompany}, #{empNum}, #{goodsImage})
 </insert>	
 	
 <select id = "numberGenerate" resultType="string">
@@ -21,13 +21,13 @@ select emp_num empNum from employees where emp_id = #{empId}
 
 <select id="selectAll" resultType="springBootTest2.domain.GoodsDTO">
 select GOODS_NUM goodsNum, GOODS_NAME goodsName, GOODS_PRICE goodsPrice, GOODS_DATE goodsDate, 
-GOODS_CONTENT goodsContent, GOODS_QTY goodsQty, GOODS_COMPANY goodsCompany, EMP_NUM emp_num
+GOODS_CONTENT goodsContent, GOODS_QTY goodsQty, GOODS_COMPANY goodsCompany, EMP_NUM emp_num, GOODS_IMAGE goodsImage
 from goods
 </select>
 
 <select id="selectOne" parameterType="String" resultType="springBootTest2.domain.GoodsDTO">
 select GOODS_NUM goodsNum, GOODS_NAME goodsName, GOODS_PRICE goodsPrice, GOODS_DATE goodsDate, 
-GOODS_CONTENT goodsContent, GOODS_QTY goodsQty, GOODS_COMPANY goodsCompany, EMP_NUM emp_num
+GOODS_CONTENT goodsContent, GOODS_QTY goodsQty, GOODS_COMPANY goodsCompany, EMP_NUM emp_num, GOODS_IMAGE goodsImage
 from goods
 where goods_num = #{goodsNum}
 </select>
@@ -40,7 +40,7 @@ where goods_num = #{goodsNum}
 <update id="goodsUpdate" parameterType="springBootTest2.domain.GoodsDTO">
 	update goods set GOODS_NUM = #{goodsNum}, GOODS_NAME = #{goodsName}, GOODS_PRICE =#{goodsPrice},
 	GOODS_DATE = #{goodsDate}, GOODS_CONTENT = #{goodsContent}, GOODS_QTY = #{goodsQty}, 
-	GOODS_COMPANY = #{goodsCompany}, EMP_NUM = #{empNum}
+	GOODS_COMPANY = #{goodsCompany}, EMP_NUM = #{empNum}, GOODS_IMAGE = #{goodsImage}
 	where goods_num = #{goodsNum}
 </update>
 

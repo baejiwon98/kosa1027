@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "kosaShoppingMall.mapper.EmpshipMapper">
+
+<select id="selectOne" parameterType="String" resultType="kosaShoppingMall.domain.EmployeeDTO">
+	select emp_id empId, emp_pw empPw, emp_name empName,
+	 emp_addr empAddr, emp_phone empPhone, emp_email empEmail from employees where emp_id = #{empId}
+</select>
+
+<update id="employeeUpdate" parameterType="kosaShoppingMall.domain.EmployeeDTO">
+	update employees set emp_id = #{empId}, emp_pw = #{empPw}, emp_name = #{empName},
+	 emp_addr = #{empAddr}, emp_phone = #{empPhone}, emp_email = #{empEmail} where emp_id = #{empId}
+</update>
+
+<update id="updatePassword" parameterType="kosaShoppingMall.domain.EmployeeDTO">
+update employees set emp_pw = #{empPw} where emp_id = #{empId}
+</update>
+
+</mapper>
