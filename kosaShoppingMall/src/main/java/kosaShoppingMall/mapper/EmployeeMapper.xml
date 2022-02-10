@@ -4,6 +4,10 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace = "kosaShoppingMall.mapper.EmployeeMapper">
 
+<select id="empCount" resultType="int">
+	select count(*) from employees
+</select>
+
 <delete id="empDels" parameterType="hashMap">
 	delete from employees where emp_id in
 	<foreach collection="deletes" item="empId" index="index" open="(" close=")" separator=",">
@@ -25,9 +29,11 @@
 	 emp_addr empAddr, emp_phone empPhone, emp_email empEmail from employees where emp_id = #{empId}
 </select>
 
-<select id="selectAll" resultType="kosaShoppingMall.domain.EmployeeDTO">
-	select emp_id empId, emp_pw empPw, emp_name empName,
-	 emp_addr empAddr, emp_phone empPhone, emp_email empEmail from employees
+<select id="selectAll" resultType="kosaShoppingMall.domain.EmployeeDTO" parameterType="StartEndPageDTO">
+	select * from
+	(select rownum rn, emp_id empId, emp_pw empPw, emp_name empName,
+	 emp_addr empAddr, emp_phone empPhone, emp_email empEmail from employees)
+	 where rn between #{startRow} and #{endRow}
 </select>
 
 <insert id="employeeInsert" parameterType="kosaShoppingMall.domain.EmployeeDTO">

@@ -8,4 +8,5 @@ public class AuthInfo {
 	String userPw;
 	String grade;
 	String phone;
+	String email;
 }

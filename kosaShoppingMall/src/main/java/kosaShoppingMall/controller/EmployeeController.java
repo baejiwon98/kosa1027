@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kosaShoppingMall.command.EmployeeCommand;
+import kosaShoppingMall.service.EmailCheckModifyService;
+import kosaShoppingMall.service.EmailCheckService;
+import kosaShoppingMall.service.IdcheckService;
 import kosaShoppingMall.service.employees.EmpDelsService;
 import kosaShoppingMall.service.employees.EmployeeDeleteService;
 import kosaShoppingMall.service.employees.EmployeeInfoService;
@@ -36,6 +39,12 @@ public class EmployeeController {
 	EmployeeDeleteService employeeDeleteService;
 	@Autowired
 	EmpDelsService empDelsService;
+	@Autowired
+	IdcheckService idcheckService;
+	@Autowired
+	EmailCheckService emailCheckService;
+	@Autowired
+	EmailCheckModifyService emailCheckModifyService;
 	
 	@ModelAttribute
 	EmployeeCommand setEmployeeCommand() {
@@ -56,6 +65,11 @@ public class EmployeeController {
 	
 	@RequestMapping(value="empUpdate", method=RequestMethod.POST)
 	public String empUpdate(EmployeeCommand employeeCommand, BindingResult result) {
+		Integer i = emailCheckModifyService.execute(employeeCommand);
+		if(i == 1) {
+			result.rejectValue("empEmail", "employeeCommand.empEmail", "중복이메일입니다.");
+			return "thymeleaf/employee/empModify";
+		}
 		String path = employeeUpdateService.execute(employeeCommand, result);
 		return path;
 	}
@@ -73,8 +87,8 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping("empList")
-	public String empList(Model model) {
-		employeeListService.execute(model);
+	public String empList(@RequestParam(value="page", defaultValue = "1", required = false)Integer page, Model model) {
+		employeeListService.execute(model, page);
 		return "thymeleaf/employee/empList";
 	}
 	
@@ -98,6 +112,18 @@ public class EmployeeController {
 			result.rejectValue("empPwCon", "employeeCommand.empPwCon","비밀번호 확인이 다릅니다.");
 			return "thymeleaf/employee/empForm";
 		}
+		Integer i = idcheckService.execute(employeeCommand.getEmpId());
+		if(i == 1) {
+			result.rejectValue("empId", "employeeCommand.empId", "중복아이디입니다.");
+			return "thymeleaf/employee/empForm";
+		}
+		
+		i = emailCheckService.execute(employeeCommand.getEmpEmail());
+		if(i == 1) {
+			result.rejectValue("empEmail", "employeeCommand.empEmail", "중복이메일입니다.");
+			return "thymeleaf/employee/empForm";
+		}
+		
 		employeeWriteService.execute(employeeCommand);
 		return "redirect:empList";	
 	}

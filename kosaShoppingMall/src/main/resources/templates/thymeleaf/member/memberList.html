@@ -20,6 +20,27 @@
 		<th>[[${dto.memPhone}]]</th>
 		<th><input type="checkbox" th:value="${dto.memNum}" name="delete"></th></tr>
 	</th:block>	
+	<tr>
+		<th colspan="5" >
+			<th:block th:if="${page <= 1 }">
+			[이전]
+			</th:block>
+			<th:block th:if ="${page > 1 }">
+			<a th:href="@{memList(page=${page - 1 })}">[이전]</a>
+			</th:block>
+			
+			<th:block th:each="i : ${#numbers.sequence(startPage, endPage)}">
+			[ <a th:href="@{memList(page=${i })}">[[${i }]]</a> ]
+ 			</th:block>
+ 			
+ 			<th:block th:if ="${page < maxPage }">
+ 			<a th:href="@{memList(page=${page + 1 })}">[이후]</a>
+ 			</th:block>
+ 			<th:block th:if ="${page >= maxPage }">
+ 			[이후]
+ 			</th:block>
+		</th>
+	</tr>
 </table>
 </form>
 <a href="memberRegist">회원등록</a>

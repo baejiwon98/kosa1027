@@ -11,4 +11,5 @@ import kosaShoppingMall.domain.MemberDTO;
 public interface LoginMapper {
 	public AuthInfo loginSelect(String id);
 	public AuthInfo findId(String email);
+	public String emailSelect(String memId);
 }

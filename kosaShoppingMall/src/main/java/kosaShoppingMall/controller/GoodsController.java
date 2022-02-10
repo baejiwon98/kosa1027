@@ -128,17 +128,20 @@ public class GoodsController {
 		return "redirect:goodsIpgoList";
 	}
 	
-	@RequestMapping(value="goodsItem", method=RequestMethod.POST)
-	public String goodsItems(@RequestParam(value="goodsName") String goodsName, Model model) {
-		goodsItemService.execute(goodsName, model);
+	@RequestMapping(value="goodsItem")
+	public String goodsItems(@RequestParam(value="page", defaultValue = "1", required = false)Integer page, 
+							 @RequestParam(value="goodsWord", required = false) String goodsWord, Model model) {
+		goodsItemService.execute(goodsWord, model, page);
 		return "thymeleaf/goods/goodsItem";
 	}
-	
+/*	
 	@RequestMapping(value="goodsItem", method=RequestMethod.GET)
-	public String goodsItem() {
+	public String goodsItem(Model model) {
+		model.addAttribute("startPage", 0);
+		model.addAttribute("endPage", 0);
 		return "thymeleaf/goods/goodsItem";
 	}
-	
+*/	
 	@RequestMapping("goodsIpgo")
 	public String goodsIpgo(GoodsIpgoCommand goodsIpgoCommand, Model model) {
 		Date now = new Date();
@@ -149,8 +152,8 @@ public class GoodsController {
 	}
 	
 	@RequestMapping("goodsIpgoList")
-	public String goodsIpgoList(Model model) {
-		goodsIpgoListService.execute(model);
+	public String goodsIpgoList(@RequestParam(value="page", defaultValue = "1", required = false)Integer page, Model model) {
+		goodsIpgoListService.execute(model, page);
 		return "thymeleaf/goods/goodsIpgoList";
 	}
 	
@@ -182,14 +185,15 @@ public class GoodsController {
 	}
 	
 	@RequestMapping("goodsSearch")
-	public String goodsSearch(@RequestParam(value = "goodsWord")String goodsWord, Model model) {
-		goodsSearchService.execute(goodsWord, model);
+	public String goodsSearch(@RequestParam(value="page", defaultValue = "1", required = false)Integer page, @RequestParam(value = "goodsWord")String goodsWord, Model model) {
+		goodsSearchService.execute(goodsWord, model, page);
 		return "thymeleaf/goods/goodsList";
 	}
 	
 	@RequestMapping("goodsList")
-	public String goodsList(GoodsCommand goodsCommand, Model model) {
-		goodsListService.execute(model);
+	public String goodsList(@RequestParam(value="goodsWord", required = false)String goodsWord, 
+			@RequestParam(value="page", defaultValue = "1", required = false) Integer page, GoodsCommand goodsCommand, Model model) {
+		goodsListService.execute(goodsWord, model, page);
 		return "thymeleaf/goods/goodsList";
 	}
 	

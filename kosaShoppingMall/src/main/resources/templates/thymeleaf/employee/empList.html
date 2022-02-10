@@ -19,7 +19,28 @@
 		<th>[[${dto.empPhone}]]</th>
 		<th><input type="checkbox" th:value="${dto.empId}" name="delete"/></th>
 		</tr>
-	</th:block>	
+	</th:block>
+	<tr>
+		<th colspan="5" >
+			<th:block th:if="${page <= 1 }">
+			[이전]
+			</th:block>
+			<th:block th:if ="${page > 1 }">
+			<a th:href="@{empList(page=${page - 1 })}">[이전]</a>
+			</th:block>
+			
+			<th:block th:each="i : ${#numbers.sequence(startPage, endPage)}">
+			[ <a th:href="@{empList(page=${i })}">[[${i }]]</a> ]
+ 			</th:block>
+ 			
+ 			<th:block th:if ="${page < maxPage }">
+ 			<a th:href="@{empList(page=${page + 1 })}">[이후]</a>
+ 			</th:block>
+ 			<th:block th:if ="${page >= maxPage }">
+ 			[이후]
+ 			</th:block>
+		</th>
+	</tr>
 </table>
 </form>
 <a href = "empJoin">직원등록</a>

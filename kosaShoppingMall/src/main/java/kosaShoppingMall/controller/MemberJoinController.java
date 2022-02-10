@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kosaShoppingMall.command.MemberCommand;
+import kosaShoppingMall.service.EmailCheckService;
+import kosaShoppingMall.service.IdcheckService;
 import kosaShoppingMall.service.member.MemberInfoService;
 import kosaShoppingMall.service.member.MemberJoinService;
 
@@ -19,6 +21,10 @@ import kosaShoppingMall.service.member.MemberJoinService;
 public class MemberJoinController {
 	@Autowired
 	MemberJoinService memberJoinService;
+	@Autowired
+	IdcheckService idcheckService;
+	@Autowired
+	EmailCheckService emailCheckService;
 	
 	@ModelAttribute
 	public MemberCommand getMemberCommand() {
@@ -46,6 +52,18 @@ public class MemberJoinController {
 		if(result.hasErrors()) {
 			return "thymeleaf/member/memberJoinForm";
 		}
+		Integer i = idcheckService.execute(memberCommand.getMemId());
+		if(i == 1) {
+			result.rejectValue("memId", "memberCommand.memId", "중복아이디입니다.");
+			return "thymeleaf/member/memberJoinForm";
+		}
+		
+		i = emailCheckService.execute(memberCommand.getMemEmail());
+		if(i == 1) {
+			result.rejectValue("memEmail", "memberCommand.memEmail", "중복이메일입니다.");
+			return "thymeleaf/member/memberJoinForm";
+		}
+		
 		memberJoinService.execute(memberCommand, result);
 		return "thymeleaf/member/welcome";
 	}

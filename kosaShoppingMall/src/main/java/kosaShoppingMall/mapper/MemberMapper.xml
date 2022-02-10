@@ -4,6 +4,10 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace = "kosaShoppingMall.mapper.MemberMapper">
 
+<select id="memberCount" resultType="int">
+	select count(*) from member
+</select>
+
 <delete id="memberDels" parameterType="hashMap">
 	delete from member where member_num in
 	<foreach collection="deletes" item="memNum" index="index" open="(" close=")" separator=",">
@@ -29,10 +33,12 @@ gender memGender, member_phone memPhone, member_birth memBirth,
 member_email memEmail from member where member_num = #{memNum}
 </select>
 
-<select id="selectAll" resultType="kosaShoppingMall.domain.MemberDTO">
-select member_num memNum, member_id memId, member_pw memPw, 
+<select id="selectAll" resultType="kosaShoppingMall.domain.MemberDTO" parameterType="StartEndPageDTO">
+select * from
+(select rownum rn, member_num memNum, member_id memId, member_pw memPw, 
 member_name memName, member_addr memAddr, member_regist memRegiDate, 
-gender memGender, member_phone memPhone, member_birth memBirth, member_email memEmail from member
+gender memGender, member_phone memPhone, member_birth memBirth, member_email memEmail from member)
+where rn between #{startRow} and #{endRow}
 </select>
 
 <insert id="memberInsert" parameterType="kosaShoppingMall.domain.MemberDTO">
