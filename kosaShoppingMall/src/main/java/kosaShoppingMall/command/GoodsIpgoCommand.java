@@ -22,4 +22,29 @@ public class GoodsIpgoCommand {
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	@NotNull(message = "제조일을 입력해주세요")
 	LocalDateTime madeDate;
+	public String getGoodsNum() {
+		return goodsNum;
+	}
+	public void setGoodsNum(String goodsNum) {
+		this.goodsNum = goodsNum;
+	}
+	public Date getIpgoDate() {
+		return ipgoDate;
+	}
+	public void setIpgoDate(Date ipgoDate) {
+		this.ipgoDate = ipgoDate;
+	}
+	public Integer getIpgoQty() {
+		return ipgoQty;
+	}
+	public void setIpgoQty(Integer ipgoQty) {
+		this.ipgoQty = ipgoQty;
+	}
+	public LocalDateTime getMadeDate() {
+		return madeDate;
+	}
+	public void setMadeDate(LocalDateTime madeDate) {
+		this.madeDate = madeDate;
+	}
+	
 }

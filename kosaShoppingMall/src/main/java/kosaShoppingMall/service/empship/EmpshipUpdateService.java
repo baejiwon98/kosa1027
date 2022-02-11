@@ -19,7 +19,7 @@ public class EmpshipUpdateService {
 		dto.setEmpId(employeeCommand.getEmpId());
 		dto.setEmpName(employeeCommand.getEmpName());
 		dto.setEmpPhone(employeeCommand.getEmpPhone());
-		dto.setEmpId(employeeCommand.getEmpEmail());
+		dto.setEmpEmail(employeeCommand.getEmpEmail());
 		
 		empshipMapper.employeeUpdate(dto);
 	}

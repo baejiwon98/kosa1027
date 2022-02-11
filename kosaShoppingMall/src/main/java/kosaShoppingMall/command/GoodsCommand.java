@@ -18,4 +18,41 @@ public class GoodsCommand {
 	@NotNull(message = "배송비를 입력하세요.")
 	Integer deliveryCost;
 	Integer visitCount;
+	public String getGoodsNum() {
+		return goodsNum;
+	}
+	public void setGoodsNum(String goodsNum) {
+		this.goodsNum = goodsNum;
+	}
+	public String getGoodsName() {
+		return goodsName;
+	}
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
+	}
+	public Integer getGoodsPrice() {
+		return goodsPrice;
+	}
+	public void setGoodsPrice(Integer goodsPrice) {
+		this.goodsPrice = goodsPrice;
+	}
+	public String getGoodsContent() {
+		return goodsContent;
+	}
+	public void setGoodsContent(String goodsContent) {
+		this.goodsContent = goodsContent;
+	}
+	public Integer getDeliveryCost() {
+		return deliveryCost;
+	}
+	public void setDeliveryCost(Integer deliveryCost) {
+		this.deliveryCost = deliveryCost;
+	}
+	public Integer getVisitCount() {
+		return visitCount;
+	}
+	public void setVisitCount(Integer visitCount) {
+		this.visitCount = visitCount;
+	}
+	
 }

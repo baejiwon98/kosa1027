@@ -70,14 +70,12 @@ public class EmployeeController {
 			result.rejectValue("empEmail", "employeeCommand.empEmail", "중복이메일입니다.");
 			return "thymeleaf/employee/empModify";
 		}
-		String path = employeeUpdateService.execute(employeeCommand, result);
-		return path;
+		return employeeUpdateService.execute(employeeCommand, result);
 	}
 	
 	@RequestMapping("empModify")
 	public String empModify(@RequestParam(value="Id") String empId, @RequestParam(value="empPw") String empPw, Model model) {
-		String path = employeeModifyService.execute(empId, empPw, model);
-		return path;
+		return employeeModifyService.execute(empId, empPw, model);
 	}
 	
 	@RequestMapping("employeeInfo")

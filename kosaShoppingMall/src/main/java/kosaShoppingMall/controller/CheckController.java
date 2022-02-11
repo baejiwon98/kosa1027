@@ -24,6 +24,25 @@ public class CheckController {
 	@Autowired
 	MemEmailCheckModifyService memEmailCheckModifyService;
 	
+	@RequestMapping(value="/mypage/memEmailCheckModify")
+	public String memEmailCheckModify1(MemberCommand memberCommand) {
+		Integer i = memEmailCheckModifyService.execute(memberCommand);
+		if(i == 0) {
+			return "사용 가능한 email 입니다.";
+		}else {
+			return "사용 중인 Email입니다.";
+		}
+	}
+	
+	@RequestMapping(value="/empMypage/emailCheckModify", method=RequestMethod.POST)
+	public String emailCheckModify1(EmployeeCommand employeeCommand) {
+		Integer i = emailCheckModifyService.execute(employeeCommand);
+		if(i == 0) {
+			return "사용 가능한 email 입니다.";
+		}else {
+			return "사용 중인 Email입니다.";
+		}
+	}
 	
 	@RequestMapping(value="/mem/memEmailCheckModify")
 	public String memEmailCheckModify(MemberCommand memberCommand) {

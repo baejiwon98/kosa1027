@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kosaShoppingMall.command.MemberCommand;
 import kosaShoppingMall.domain.AuthInfo;
+import kosaShoppingMall.service.MemEmailCheckModifyService;
 import kosaShoppingMall.service.member.MemberDropService;
 import kosaShoppingMall.service.member.MemberPasswordService;
 import kosaShoppingMall.service.member.MemberUpdateService;
@@ -32,6 +33,8 @@ public class MemberMypageController {
 	MemberDropService memberDropService;
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	@Autowired
+	MemEmailCheckModifyService memEmailCheckModifyService;
 	
 	@RequestMapping(value="memberDropOk", method=RequestMethod.POST)
 	public String memberDropOk(@RequestParam(value="memPw") String memPw, Model model,HttpSession session) {
@@ -91,6 +94,11 @@ public class MemberMypageController {
 	@RequestMapping(value="membershipUpdate", method=RequestMethod.POST)
 	public String memberUpdate(@Validated MemberCommand memberCommand, BindingResult result) {
 		if(result.hasErrors()) {
+			return "thymeleaf/member/membershipModify";
+		}
+		Integer i = memEmailCheckModifyService.execute(memberCommand);
+		if(i == 1) {
+			result.rejectValue("memEmail", "memberCommand.memEmail", "중복이메일입니다.");
 			return "thymeleaf/member/membershipModify";
 		}
 		memberUpdateService.execute(memberCommand);

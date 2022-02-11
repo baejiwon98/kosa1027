@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kosaShoppingMall.command.EmployeeCommand;
 import kosaShoppingMall.domain.AuthInfo;
+import kosaShoppingMall.service.EmailCheckModifyService;
 import kosaShoppingMall.service.empship.EmpPasswordService;
 import kosaShoppingMall.service.empship.EmpshipInfoService;
 import kosaShoppingMall.service.empship.EmpshipUpdateService;
@@ -29,6 +30,8 @@ public class EmpMyPageController {
 	EmpPasswordService empPasswordService;
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	@Autowired
+	EmailCheckModifyService emailCheckModifyService;
 	
 	@RequestMapping(value="empPassModify", method=RequestMethod.POST)
 	public String empPassModify(@RequestParam(value="empPw") String oldPw, 
@@ -71,6 +74,11 @@ public class EmpMyPageController {
 	@RequestMapping(value="empUpdate", method=RequestMethod.POST)
 	public String empUpdate(@Validated EmployeeCommand employeeCommand, BindingResult result){
 		if(result.hasErrors()) {
+			return "thymeleaf/employeesShip/empModify";
+		}
+		Integer i = emailCheckModifyService.execute(employeeCommand);
+		if(i == 1) {
+			result.rejectValue("empEmail", "employeeCommand.empEmail", "중복이메일입니다.");
 			return "thymeleaf/employeesShip/empModify";
 		}
 		empshipUpdateService.execute(employeeCommand);

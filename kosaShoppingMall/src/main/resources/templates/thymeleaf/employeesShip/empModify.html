@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <style type="text/css">
 #leftMenu {
     float:left;
@@ -32,6 +33,31 @@ li a:hover:not(.active) {
 }
 </style>
 </head>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#empEmail").keyup(function(){
+		$.ajax({
+			type : "post",
+			url : "emailCheckModify",
+			dataType : "text",
+			data : {"empEmail": $("#empEmail").val(),"empId":"[[${employeeCommand.empId}]]"},
+			success: function(result) {
+				$("#emailCheckModify").html(result);
+				if(result == "사용 가능한 email 입니다."){
+					$("#emailCheckModify").css("color", "blue");
+				}else{
+					$("#emailCheckModify").css("color", "red");
+				}
+			},
+			error : function() {
+				alert('에러');
+				return;
+			}
+		});
+	});
+});
+</script>
 <body>
 <div id="leftMenu">
 	<ul>
@@ -44,7 +70,7 @@ li a:hover:not(.active) {
 <div id ="empInfo">
 수정페이지 <br />
 <form action="empUpdate" method="post" th:object="${employeeCommand}">
-아이디 :  <input type="text" name="empId" 
+아이디 :  <input type="text" name="empId" id = "empId"
 			th:value="${employeeCommand.empId}" readonly = "readonly"/>
 		<span th:if="${#fields.hasErrors('empId')}" th:errors="*{empId}" style="color:red"></span><br />
 이름 : <input type="text" name="empName" 
@@ -56,9 +82,11 @@ li a:hover:not(.active) {
 핸드폰번호 : <input type="text" name="empPhone" 
 			th:value="${employeeCommand.empPhone}"/>
 		<span th:if="${#fields.hasErrors('empPhone')}" th:errors="*{empPhone}" style="color:red"></span><br />
-이메일 : <input type="email" name="empEmail" 
+이메일 : <input type="email" name="empEmail" id = "empEmail"
 			th:value="${employeeCommand.empEmail}"/>
-		<span th:if="${#fields.hasErrors('empEmail')}" th:errors="*{empEmail}" style="color:red"></span><br />
+		<span th:if="${#fields.hasErrors('empEmail')}" th:errors="*{empEmail}" style="color:red"></span>
+		<span id = "emailCheckModify"></span><br>
+		<br />
 <input type="hidden" name="empPw" value="12345" /><br />
 <input type="hidden" name="empPwCon" value="12345" /><br />
 <input type="submit" value="수정완료"/>
