@@ -6,10 +6,10 @@
 
 <select id="findPw" parameterType="kosaShoppingMall.command.FindPasswordCommand" resultType="String">
  	select 'mem' from member
- 	where member_id = #{userId} and member_phone = #{userPhone} and member_email = #{userEmail}
+ 	where member_id = #{userId} and member_phone = #{userPhone} and lower(member_email) = lower(#{userEmail})
  	union
  	select 'emp' from employees
- 	where emp_id = #{userId} and emp_phone = #{userPhone} and emp_email = #{userEmail}
+ 	where emp_id = #{userId} and emp_phone = #{userPhone} and lower(emp_email) = lower(#{userEmail})
 </select>
 
 <select id="loginSelect" parameterType="string" resultType="kosaShoppingMall.domain.AuthInfo">
