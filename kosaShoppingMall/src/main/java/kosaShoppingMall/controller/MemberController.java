@@ -105,7 +105,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberRegist", method = RequestMethod.POST)
-	public String memberRegist(@Validated MemberCommand memberCommand, BindingResult result) {
+	public String memberRegist(@Validated MemberCommand memberCommand, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			return "thymeleaf/member/memberForm";
 			//return "member/memberForm";
@@ -127,7 +127,7 @@ public class MemberController {
 			return "thymeleaf/member/memberJoinForm";
 		}
 		
-		memberWriteService.execute(memberCommand);
+		memberWriteService.execute(memberCommand, model);
 		return "redirect:memList";
 	}
 	
