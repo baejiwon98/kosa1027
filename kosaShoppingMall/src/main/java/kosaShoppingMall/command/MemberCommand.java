@@ -40,6 +40,14 @@ public class MemberCommand {
 	String memEmail;
 	String memOk;
 	
+	public String getMemOk() {
+		return memOk;
+	}
+
+	public void setMemOk(String memOk) {
+		this.memOk = memOk;
+	}
+
 	public boolean isMemPwEqualsMemPwCon() {
 		return memPw.equals(memPwCon);
 	}

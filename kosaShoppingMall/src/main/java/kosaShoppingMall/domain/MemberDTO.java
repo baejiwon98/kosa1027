@@ -23,6 +23,12 @@ public class MemberDTO {
 	Date memBirth;
 	String memEmail;
 	String memOk;
+	public String getMemOk() {
+		return memOk;
+	}
+	public void setMemOk(String memOk) {
+		this.memOk = memOk;
+	}
 	public String getMemNum() {
 		return memNum;
 	}

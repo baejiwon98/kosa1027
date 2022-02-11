@@ -10,6 +10,12 @@ public class AuthInfo {
 	String phone;
 	String email;
 	String memOk;
+	public String getMemOk() {
+		return memOk;
+	}
+	public void setMemOk(String memOk) {
+		this.memOk = memOk;
+	}
 	public String getUserId() {
 		return userId;
 	}
