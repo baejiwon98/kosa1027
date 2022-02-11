@@ -3,6 +3,7 @@ package kosaShoppingMall.mapper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import kosaShoppingMall.command.FindPasswordCommand;
 import kosaShoppingMall.domain.AuthInfo;
 import kosaShoppingMall.domain.MemberDTO;
 
@@ -12,4 +13,5 @@ public interface LoginMapper {
 	public AuthInfo loginSelect(String id);
 	public AuthInfo findId(String email);
 	public String emailSelect(String memId);
+	public String findPw(FindPasswordCommand findPasswordCommand);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import kosaShoppingMall.domain.AuthInfo;
 import kosaShoppingMall.domain.EmployeeDTO;
 import kosaShoppingMall.domain.MemberDTO;
 import kosaShoppingMall.domain.StartEndPageDTO;
@@ -20,4 +21,5 @@ public interface MemberMapper {
 	public Integer memberDelete(String memNum);
 	public Integer memberDels(String[] deletes);
 	public int memberCount();
+	public Integer changePw(AuthInfo authInfo);
 }

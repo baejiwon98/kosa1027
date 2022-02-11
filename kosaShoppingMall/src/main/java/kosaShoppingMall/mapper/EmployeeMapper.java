@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import kosaShoppingMall.domain.AuthInfo;
 import kosaShoppingMall.domain.EmployeeDTO;
 import kosaShoppingMall.domain.StartEndPageDTO;
 
@@ -18,4 +19,5 @@ public interface EmployeeMapper {
 	public Integer empDelete(String empId);
 	public Integer empDels(String[] deletes);
 	public int empCount();
+	public Integer changePw(AuthInfo authInfo);
 }
