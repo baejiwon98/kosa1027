@@ -22,6 +22,7 @@ public class MemberDTO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date memBirth;
 	String memEmail;
+	String memOk;
 	public String getMemNum() {
 		return memNum;
 	}

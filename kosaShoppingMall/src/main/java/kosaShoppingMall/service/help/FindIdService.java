@@ -45,7 +45,7 @@ public class FindIdService {
 					msg.setContent(content, "text/html; charset=UTF-8");
 					msg.setSubject(subject);
 					/*
-					msg.setFrom(new InternetAddress("sender@gmail.com")); 보내는 사람
+					msg.setFrom(new InternetAddress("sender@gmail.com")); //보내는 사람
 					*/
 					msg.setRecipient(MimeMessage.RecipientType.TO,
 							new InternetAddress(findIdCommand.getMemEmail())); // 받는 사람

@@ -9,6 +9,7 @@ public class AuthInfo {
 	String grade;
 	String phone;
 	String email;
+	String memOk;
 	public String getUserId() {
 		return userId;
 	}

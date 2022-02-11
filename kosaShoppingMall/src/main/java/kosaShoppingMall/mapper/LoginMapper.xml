@@ -13,8 +13,11 @@
 </select>
 
 <select id="loginSelect" parameterType="string" resultType="kosaShoppingMall.domain.AuthInfo">
-select member_id userId, member_pw userPw, member_email email, 'mem' grade from member where member_id = #{userId}
-union select emp_id, emp_pw, emp_email, 'emp' from employees where emp_id = #{userId}
+select member_id userId, member_pw userPw, 'mem' grade, member_ok memOk
+from member 
+where member_id = #{userId}
+union 
+select emp_id, emp_pw, 'emp', null from employees where emp_id = #{userId}
 </select>
 <select id="emailSelect"  parameterType="string" resultType="string">
 	select member_Email from member

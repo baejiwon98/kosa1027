@@ -38,6 +38,7 @@ public class MemberCommand {
 	@Email(message="형식에 맞지 않습니다.")
 	@NotBlank(message = "이메일 입력하여 주세요.")
 	String memEmail;
+	String memOk;
 	
 	public boolean isMemPwEqualsMemPwCon() {
 		return memPw.equals(memPwCon);

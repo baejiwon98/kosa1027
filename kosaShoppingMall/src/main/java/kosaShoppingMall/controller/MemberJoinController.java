@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kosaShoppingMall.command.MemberCommand;
 import kosaShoppingMall.service.EmailCheckService;
 import kosaShoppingMall.service.IdcheckService;
-import kosaShoppingMall.service.member.MemberInfoService;
 import kosaShoppingMall.service.member.MemberJoinService;
+import kosaShoppingMall.service.member.MemberMailService;
 
 @Controller
 @RequestMapping("register")
@@ -25,6 +25,19 @@ public class MemberJoinController {
 	IdcheckService idcheckService;
 	@Autowired
 	EmailCheckService emailCheckService;
+	@Autowired
+	MemberMailService memberMailService;
+	
+	@RequestMapping("memberMail")
+	public String memberMail(@RequestParam(value = "num") String num,
+			@RequestParam(value = "reciver") String reciver, @RequestParam(value = "userId") String userId) {
+		Integer i = memberMailService.execute(num, reciver, userId);
+		if(i > 0) {
+			return "thymeleaf/membership/success";
+		}else {
+			return "thymeleaf/membership/fail";
+		}
+	}
 	
 	@ModelAttribute
 	public MemberCommand getMemberCommand() {
@@ -48,7 +61,7 @@ public class MemberJoinController {
 		return "thymeleaf/member/memberJoinForm";
 	}
 	@RequestMapping(value = "memberJoinAction", method = RequestMethod.POST)
-	public String join(@Validated MemberCommand memberCommand, BindingResult result) {
+	public String join(@Validated MemberCommand memberCommand, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			return "thymeleaf/member/memberJoinForm";
 		}
@@ -64,7 +77,7 @@ public class MemberJoinController {
 			return "thymeleaf/member/memberJoinForm";
 		}
 		
-		memberJoinService.execute(memberCommand, result);
+		memberJoinService.execute(memberCommand, result, model);
 		return "thymeleaf/member/welcome";
 	}
 }

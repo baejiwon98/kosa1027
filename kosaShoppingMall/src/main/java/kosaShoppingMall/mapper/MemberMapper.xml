@@ -4,6 +4,12 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace = "kosaShoppingMall.mapper.MemberMapper">
 
+<update id="joinOkUpdate" parameterType="kosaShoppingMall.domain.MemberDTO">
+	update member
+	set member_ok = #{memOk}
+	where member_id = #{memId} and member_email = #{memEmail} and member_ok is null
+</update>
+
 <update id="changePw" parameterType="kosaShoppingMall.domain.AuthInfo">
 	update member 
 	set member_pw = #{userPw}

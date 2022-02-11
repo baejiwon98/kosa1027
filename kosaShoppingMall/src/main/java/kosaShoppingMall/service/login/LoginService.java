@@ -23,9 +23,13 @@ public class LoginService {
 	
 	public String execute(LoginCommand loginCommand, BindingResult result, HttpSession session) {
 		String path = "thymeleaf/index";
-		
 		AuthInfo authInfo = loginMapper.loginSelect(loginCommand.getUserId());
 		if(authInfo != null) {
+			if(authInfo.getMemOk() == null && authInfo.getGrade().equals("mem")) {
+				result.rejectValue("userId", "loginCommand.userId", "이메일 인증이 되지 않았습니다.");
+				return path;
+			}
+			
 			if(passwordEncoder.matches(loginCommand.getUserPw(), authInfo.getUserPw())) {
 				session.setAttribute("authInfo", authInfo);
 				path = "redirect:/"; 
