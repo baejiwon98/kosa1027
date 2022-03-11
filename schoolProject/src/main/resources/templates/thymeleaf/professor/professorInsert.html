@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+교수 추가 <br />
+<form action="professorInsert" id="frm" name="frm" method="post">
+<table>
+<tr><th>교수번호</th><td><input type="text" name="professorNum" id="professorNum" readonly="readonly" th:value="${professorCommand.professorNum}"/></td></tr>
+<tr><th>학과번호</th><td>
+<select id="departmentNum" name="departmentNum" th:object="${professorCommand.departmentNum}">
+	<th:block th:each = "dto, idx : ${list}">
+		<option th:value="${dto.departmentNum}">[[${dto.departmentName}]]</option>
+	</th:block>
+</select></td></tr>
+<tr><th>아이디</th><td><input type="text" name="professorId" id="professorId" /></td></tr>
+<tr><th>비밀번호</th><td><input type="password" name="professorPw" id="professorPw" /></td></tr>
+<tr><th>교수이름</th><td><input type="text" name="professorName" id="professorName"  /></td></tr>
+<tr><th>교수연락처</th><td><input type="tel" name="professorPhone" id="professortPhone"  /></td></tr>
+<tr><th>교수이메일</th><td><input type="email" name="professorEmail" id="professorEmail"  /></td></tr>
+<tr><th colspan="2"><input type="submit" value="완료"/></th></tr>
+</table>
+</form>
+</body>
+</html>

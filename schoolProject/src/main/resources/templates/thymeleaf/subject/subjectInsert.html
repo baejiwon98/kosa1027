@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+과목추가페이지
+<form action="subjectInsert" id = "frm" name="frm" method="post">
+과목번호 : <input type="text" name="subjectNum" id="subjectNum" readonly="readonly" th:value=${subjectCommand.subjectNum} /><br />
+과목명 : <input type="text" name="subjectName" id="subjectName" th:value=${subjectCommand.subjectName}/><br />
+제목 : <input type="text" name="subjectTitle" id="subjectTitle" th:value=${subjectCommand.subjectTitle}/><br />
+내용 : <textarea name="subjectContent" id="subjectContent" th:value=${subjectCommand.subjectContent} rows="6"></textarea>
+<br />
+<input type="submit" value="완료" />
+</form>
+</body>
+</html>

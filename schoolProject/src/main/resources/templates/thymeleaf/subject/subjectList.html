@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+과목리스트킬킬<br />
+과목수 : [[${count}]]
+<table border = 1 width = "600">
+<tr><th>과목번호</th><th>과목명</th><th>제목</th></tr>
+<th:block th:each="dto, idx : ${list}">
+	<tr>
+	<th><a th:href="@{subjectInfo(num=${dto.subjectNum})}">[[${dto.subjectNum}]]</a></th>
+	<th><a th:href="@{subjectInfo(num=${dto.subjectNum})}">[[${dto.subjectName}]]</a></th>
+	<th>[[${dto.subjectTitle}]]</th>
+	</tr>
+</th:block>
+	<tr>
+		<th colspan="6" >
+			<th:block th:if="${page <= 1 }">
+			[이전]
+			</th:block>
+			<th:block th:if ="${page > 1 }">
+			<a th:href="@{subjectList(page=${page - 1 })}">[이전]</a>
+			</th:block>
+			
+			<th:block th:each="i : ${#numbers.sequence(startPage, endPage)}">
+			[ <a th:href="@{subjectList(page=${i })}">[[${i }]]</a> ]
+ 			</th:block>
+ 			
+ 			<th:block th:if ="${page < maxPage }">
+ 			<a th:href="@{subjectList(page=${page + 1 })}">[이후]</a>
+ 			</th:block>
+ 			<th:block th:if ="${page >= maxPage }">
+ 			[이후]
+ 			</th:block>
+		</th>
+	</tr>
+</table>
+<a href="subjectInsert">추가</a>
+</body>
+</html>

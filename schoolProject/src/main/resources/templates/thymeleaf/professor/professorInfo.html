@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+상세정보쓰<br />
+교수번호 : [[${dto.professorNum}]]<br />
+학과번호 : [[${dto.departmentNum}]]<br />
+아이디 : [[${dto.professorId}]]<br />
+교수이름 : [[${dto.professorName}]]<br />
+교수연락처 : [[${dto.professorPhone}]]<br />
+교수이메일 : [[${dto.professorEmail}]]<br />
+<a th:href="@{professorModify(num=${dto.professorNum})}">수정</a>
+<a th:href="@{professorDelete(num=${dto.professorNum})}">삭제</a>
+<a href="professorList">교수리스트로갈까여?</a>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+<script>
+   function openZipSearch() {
+      new daum.Postcode(
+            {
+               oncomplete : function(data) {
+                  var fullAddr = data.address; // 최종 주소 변수
+                  var extraAddr = ''; // 조합형 주소 변수
+
+                  // 기본 주소가 도로명 타입일때 조합한다.
+                  if (data.addressType === 'R') {
+                     //법정동명이 있을 경우 추가한다.
+                     if (data.bname !== '') {
+                        extraAddr += data.bname;
+                     }
+                     // 건물명이 있을 경우 추가한다.
+                     if (data.buildingName !== '') {
+                        extraAddr += (extraAddr !== '' ? ', '
+                              + data.buildingName : data.buildingName);
+                     }
+                     // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                     fullAddr += (extraAddr !== '' ? ' (' + extraAddr
+                           + ')' : '');
+
+                     $('[name=fullAddr]').val(fullAddr);
+                     $('[name=zip]').val(data.zonecode); // 우편번호 (5자리)
+                     $('[name=addr1]').val(data.address);
+                     $('[name=addr2]').val(data.buildingName);
+                  }
+               }
+            }).open();
+   }
+</script>
+<body>
+학과를추가하여주십시오오오랑우탄<br />
+<form action="majorInsert" id="frm" method="post" th:object="${majorCommand}">
+<table>
+<tr><th>학과 번호</th><td><input type = "text" id = "departmentNum" name = "departmentNum" readonly=readonly th:value="${majorCommand.departmentNum}"/></td>
+<td><span th:if="${#fields.hasErrors('departmentNum')}" th:errors="*{departmentNum}"></span></td></tr>
+<tr><th>학과명</th><td><input type = "text" id = "departmentName" name = "departmentName" th:value="${majorCommand.departmentName}"/></td>
+<td><span th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}"></span></td></tr>
+<tr><th>학과 연락처</th><td><input type = "text" id = "departmentPhone" name = "departmentPhone" th:value="${majorCommand.departmentPhone}"/></td>
+<td><span th:if="${#fields.hasErrors('departmentPhone')}" th:errors="*{departmentPhone}"></span></td></tr>
+<tr><th>학과 주소</th>
+         <td>
+         우편 번호 : <input type="text" name="zip" readonly=readonly> <span th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></span><br />
+         <button type="button" onclick='openZipSearch();' >주소검색</button><br />
+         전체 주소  : <input type="text" name="fullAddr" size="50" readonly=readonly> <span th:if="${#fields.hasErrors('fullAddr')}" th:errors="*{fullAddr}"></span> <br />
+         주소 : <input type="text" name="addr1" readonly=readonly> 
+         빌딩 이름  : <input type="text" name="addr2" readonly=readonly><br />
+         상세 주소 :  <input type="text" name="detailAddr"> <span th:if="${#fields.hasErrors('detailAddr')}" th:errors="*{detailAddr}"></span> <br />
+         </td></tr>
+<tr><th colspan="2"><input type="submit" value="완료" /></th></tr>
+</table>
+</form>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+상세정보쓰<br />
+과목번호 : [[${dto.subjectNum}]]<br />
+과목명 : [[${dto.subjectName}]]<br />
+과목제목 : [[${dto.subjectTitle}]]<br />
+과목내용 : [[${dto.subjectContent}]]<br />
+<a th:href="@{subjectModify(num=${dto.subjectNum})}">수정</a>
+<a th:href="@{subjectDelete(num=${dto.subjectNum})}">삭제</a>
+<a href="subjectList">과목리스트로갈까여?</a>
+</body>
+</html>
