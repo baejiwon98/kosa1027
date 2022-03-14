@@ -11,6 +11,7 @@ delete from professor where professor_num = #{professorNum}
 <update id="professorUpdate" parameterType="ProfessorDTO">
 update professor set professor_num =#{professorNum}, department_num=#{departmentNum}, professor_id =#{professorId}, 
 professor_pw=#{professorPw}, professor_name =#{professorName}, professor_phone =#{professorPhone}, professor_email =#{professorEmail}
+where professor_num = #{professorNum}
 </update>
 
 <select id="selectOne" resultType="ProfessorDTO" parameterType="String">

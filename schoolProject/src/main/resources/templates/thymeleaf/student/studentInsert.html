@@ -8,8 +8,12 @@
 학생추가<br />
 <form action="studentInsert" id="frm" name="frm" method="post">
 <table>
-<tr><th>학생번호</th><td><input type="text" name="studentNum" id="studentNum" readonly="readonly" /></td></tr>
-<tr><th>학과번호</th><td><input type="text" name="departmentNum" id="departmentNum"  /></td></tr>
+<tr><th>학과번호</th><td>
+<select id="departmentNum" name="departmentNum" th:object="${studentCommand.departmentNum}">
+	<th:block th:each = "dto, idx : ${list}">
+		<option th:value="${dto.departmentNum}">[[${dto.departmentName}]]</option>
+	</th:block>
+</select></td></tr>
 <tr><th>학생아이디</th><td><input type="text" name="studentId" id="studentId" /></td></tr>
 <tr><th>학생비밀번호</th><td><input type="password" name="studentPw" id="studentPw" /></td></tr>
 <tr><th>학생명</th><td><input type="text" name="studentName" id="studentName"  /></td></tr>

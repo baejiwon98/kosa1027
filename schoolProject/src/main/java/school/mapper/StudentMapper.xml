@@ -2,4 +2,47 @@
 <!DOCTYPE mapper PUBLIC
 	"-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace = "school.mapper.StudentMapper"></mapper>
+<mapper namespace = "school.mapper.StudentMapper">
+
+<delete id="studentDelete" parameterType="String">
+delete from student where student_num = #{studentNum}
+</delete>
+
+<update id="studentUpdate" parameterType="StudentDTO">
+update student set student_num =#{studentNum}, department_num=#{departmentNum}, student_id =#{studentId}, 
+student_pw=#{studentPw}, student_name =#{studentName}, student_phone =#{studentPhone}, student_email =#{studentEmail}
+where student_num =#{studentNum}
+</update>
+
+<select id="selectOne" resultType="StudentDTO" parameterType="String">
+select student_num studentNum, department_num departmentNum, student_id studentId, student_pw studentPw, 
+student_name studentName, student_phone studentPhone, student_email studentEmail from student
+where student_num = #{studentNum}
+</select>
+
+<select id="studentCount" resultType="int">
+	select count(*) from student
+</select>
+
+<select id="selectAll" resultType="StudentDTO" parameterType="StartEndPageDTO">
+select * from
+(select rownum rn, student_num studentNum, department_num departmentNum, student_id studentId, student_pw studentPw, 
+student_name studentName, student_phone studentPhone, student_email studentEmail from student)
+where rn between #{startRow} and #{endRow}
+</select>
+
+<insert id="studentInsert" parameterType="StudentDTO">
+	insert into student (student_num, department_num, student_id, student_pw, student_name,
+	student_phone, student_email) values
+	(#{studentNum}, #{departmentNum}, #{studentId}, #{studentPw}, #{studentName}, #{studentPhone}, #{studentEmail})
+</insert>
+
+<select id="selectDepartment" resultType="MajorDTO">
+select department_num departmentNum, department_name departmentName from department
+</select>
+
+<select id="autoNum" resultType="String" parameterType="String">
+select extract (year from sysdate) || #{department_Num} ||(nvl(max(substr(student_num, -5)), 10000)+1) from student
+</select>
+
+</mapper>
