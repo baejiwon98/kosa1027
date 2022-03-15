@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import kosaShoppingMall.command.FindPasswordCommand;
 import kosaShoppingMall.domain.AuthInfo;
-import kosaShoppingMall.domain.MemberDTO;
 
 @Component
 @Repository(value= "kosaShoppingMall.mapper.LoginMapper")

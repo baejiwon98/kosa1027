@@ -1,0 +1,12 @@
+package school.domain;
+
+import lombok.Data;
+
+@Data
+public class AuthInfo {
+	String userId;
+	String userPw;
+	String grade;
+	String phone;
+	String email;
+}

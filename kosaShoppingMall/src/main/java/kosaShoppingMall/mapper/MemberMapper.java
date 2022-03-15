@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import kosaShoppingMall.domain.AuthInfo;
-import kosaShoppingMall.domain.EmployeeDTO;
 import kosaShoppingMall.domain.MemberDTO;
 import kosaShoppingMall.domain.StartEndPageDTO;
 

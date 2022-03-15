@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "school.mapper.LoginMapper">
+
+<select id="loginSelect" parameterType="string" resultType="school.domain.AuthInfo">
+select student_id userId, student_pw userPw, 'stu' grade from student 
+where student_id = #{userId}
+union 
+select professor_id, professor_pw, 'prof' from professor where professor_id = #{userId}
+</select>
+
+</mapper>

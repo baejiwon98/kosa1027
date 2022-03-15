@@ -10,10 +10,11 @@
 학과번호 : [[${dto.departmentNum}]]<br />
 아이디 : [[${dto.studentId}]]<br />
 학생이름 : [[${dto.studentName}]]<br />
-하생연락처 : [[${dto.studentPhone}]]<br />
+학생연락처 : [[${dto.studentPhone}]]<br />
 학생이메일 : [[${dto.studentEmail}]]<br />
 <a th:href="@{studentModify(num=${dto.studentNum})}">수정</a>
 <a th:href="@{studentDelete(num=${dto.studentNum})}">삭제</a>
 <a href="studentList">학생리스트로갈까여?</a>
+
 </body>
 </html>
