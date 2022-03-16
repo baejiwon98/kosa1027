@@ -3,17 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+function selectDepNum() {
+	   $.ajax({
+	      type : "post",
+	      dataType: "text",
+	      data: {"departmentNum" : $('#departmentNum').val()},
+	      url: "depNum",
+	      success : function(result){
+	         $('#studentNum').val(result);
+	      },
+	      error : function() {
+	    	  alert('에러');
+	    	  return;
+	      }
+	   });
+	};
+	 
+</script>
 </head>
 <body>
 학생추가<br />
 <form action="studentInsert" id="frm" name="frm" method="post">
 <table>
 <tr><th>학과번호</th><td>
-<select id="departmentNum" name="departmentNum" th:object="${studentCommand.departmentNum}">
+<select id="departmentNum" name="departmentNum" oninput="selectDepNum()">
 	<th:block th:each = "dto, idx : ${list}">
 		<option th:value="${dto.departmentNum}">[[${dto.departmentName}]]</option>
 	</th:block>
 </select></td></tr>
+<tr><th>학생번호</th><td><input type="text" name="studentNum" id="studentNum" readonly="readonly"/></td></tr>
 <tr><th>학생아이디</th><td><input type="text" name="studentId" id="studentId" /></td></tr>
 <tr><th>학생비밀번호</th><td><input type="password" name="studentPw" id="studentPw" /></td></tr>
 <tr><th>학생명</th><td><input type="text" name="studentName" id="studentName"  /></td></tr>

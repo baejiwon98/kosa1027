@@ -43,6 +43,7 @@ select department_num departmentNum, department_name departmentName from departm
 
 <select id="autoNum" resultType="String" parameterType="String">
 select extract (year from sysdate) || #{department_Num} ||(nvl(max(substr(student_num, -5)), 10000)+1) from student
+where department_num = #{departmentNum}
 </select>
 
 </mapper>
