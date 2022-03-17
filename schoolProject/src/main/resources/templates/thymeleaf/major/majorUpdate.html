@@ -40,22 +40,25 @@
 </script>
 <body>
 수정페이지일걸여?
-<form action="../majorUpdate" method="post">
+<form action="majorUpdate" id="frm" name ="frm" method="post" th:object="${majorCommand}">
 <table>
-<tr><th>학과 번호</th><td><input type = "text" id = "departmentNum" name = "departmentNum" readonly=readonly th:value="${dto.departmentNum}"/></td>
-<td><span th:if="${#fields.hasErrors('departmentNum')}" th:errors="*{departmentNum}"></span></td></tr>
-<tr><th>학과명</th><td><input type = "text" id = "departmentName" name = "departmentName" th:value="${dto.departmentName}"/></td>
-<td><span th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}"></span></td></tr>
-<tr><th>학과 연락처</th><td><input type = "text" id = "departmentPhone" name = "departmentPhone" th:value="${dto.departmentPhone}"/></td>
-<td><span th:if="${#fields.hasErrors('departmentPhone')}" th:errors="*{departmentPhone}"></span></td></tr>
+<tr><th>학과 번호</th><td><input type = "text" id = "departmentNum" name = "departmentNum" readonly=readonly th:value="${majorCommand.departmentNum}"/>
+<span th:if="${#fields.hasErrors('departmentNum')}" th:errors="*{departmentNum}"></span></td></tr>
+<tr><th>학과명</th><td><input type = "text" id = "departmentName" name = "departmentName" th:value="${majorCommand.departmentName}"/>
+<span th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}"></span></td></tr>
+<tr><th>학과 연락처</th><td><input type = "text" id = "departmentPhone" name = "departmentPhone" th:value="${majorCommand.departmentPhone}"/>
+<span th:if="${#fields.hasErrors('departmentPhone')}" th:errors="*{departmentPhone}"></span></td></tr>
 <tr><th>학과 주소</th>
          <td>
-         우편 번호 : <input type="text" name="zip" readonly=readonly th:value="${dto.zip}"> <span th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></span><br />
+         우편 번호 : <input type="text" name="zip" id="zip" readonly=readonly th:value="${majorCommand.zip}">
+         <span th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></span><br />
          <button type="button" onclick='openZipSearch();' >주소검색</button><br />
-         전체 주소  : <input type="text" name="fullAddr" size="50" readonly=readonly th:value="${dto.fullAddr}"> <span th:if="${#fields.hasErrors('fullAddr')}" th:errors="*{fullAddr}"></span> <br />
-         주소 : <input type="text" name="addr1" readonly=readonly th:value="${dto.addr1}"> 
-         빌딩 이름  : <input type="text" name="addr2" readonly=readonly th:value="${dto.addr2}"><br />
-         상세 주소 :  <input type="text" name="detailAddr" th:value="${dto.detailAddr}"> <span th:if="${#fields.hasErrors('detailAddr')}" th:errors="*{detailAddr}"></span> <br />
+         전체 주소  : <input type="text" name="fullAddr" id ="fullAddr" size="50" readonly=readonly th:value="${majorCommand.fullAddr}">
+         <span th:if="${#fields.hasErrors('fullAddr')}" th:errors="*{fullAddr}"></span> <br />
+         주소 : <input type="text" name="addr1" id="addr1" readonly=readonly th:value="${majorCommand.addr1}"> 
+         빌딩 이름  : <input type="text" name="addr2" id="addr2" readonly=readonly th:value="${majorCommand.addr2}"><br />
+         상세 주소 :  <input type="text" name="detailAddr" id="detailAddr" th:value="${majorCommand.detailAddr}">
+         <span th:if="${#fields.hasErrors('detailAddr')}" th:errors="*{detailAddr}"></span><br />
          </td></tr>
 <tr><th colspan="2"><input type="submit" value="수정완료" /></th></tr>
 </table>

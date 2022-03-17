@@ -4,7 +4,51 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
-<script>
+<script type="text/javascript">
+$(function(){
+	$("#studentEmail").keyup(function(){
+		$.ajax({
+			type : "post",
+			url : "emailCheck",
+			dataType : "text",
+			data : {"studentEmail": $("#studentEmail").val()},
+			success: function(result) {
+				$("#emailCheck").html(result);
+				if(result == "사용 가능한 email 입니다."){
+					$("#emailCheck").css("color", "blue");
+				}else{
+					$("#emailCheck").css("color", "red");
+				}
+			},
+			error : function() {
+				alert('에러');
+				return;
+			}
+		});
+	});
+	
+	$("#studentId").keyup(function(){
+		$.ajax({
+			type : "post",
+			url : "idCheck",
+			dataType : "text",
+			data : {"studentId": $("#studentId").val()},
+			success: function(result) {
+				$("#idCheck").html(result);
+				if(result == "사용 가능한 id입니다."){
+					$("#idCheck").css("color", "blue");
+				}else{
+					$("#idCheck").css("color", "red");
+				}
+			},
+			error : function() {
+				alert('에러');
+				return;
+			}
+		});
+	});
+});
+
 function selectDepNum() {
 	   $.ajax({
 	      type : "post",
@@ -19,26 +63,36 @@ function selectDepNum() {
 	    	  return;
 	      }
 	   });
-	};
-	 
+	}; 
 </script>
 </head>
 <body>
 학생추가<br />
-<form action="studentInsert" id="frm" name="frm" method="post">
+<form action="studentInsert" id="frm" name="frm" method="post" th:object="${studentCommand}">
 <table>
 <tr><th>학과번호</th><td>
-<select id="departmentNum" name="departmentNum" oninput="selectDepNum()">
+<select id="departmentNum" name="departmentNum" oninput="selectDepNum()" th:value="${studentCommand.departmentNum}">
 	<th:block th:each = "dto, idx : ${list}">
 		<option th:value="${dto.departmentNum}">[[${dto.departmentName}]]</option>
 	</th:block>
-</select></td></tr>
-<tr><th>학생번호</th><td><input type="text" name="studentNum" id="studentNum" readonly="readonly"/></td></tr>
-<tr><th>학생아이디</th><td><input type="text" name="studentId" id="studentId" /></td></tr>
-<tr><th>학생비밀번호</th><td><input type="password" name="studentPw" id="studentPw" /></td></tr>
-<tr><th>학생명</th><td><input type="text" name="studentName" id="studentName"  /></td></tr>
-<tr><th>학생연락처</th><td><input type="tel" name="studentPhone" id="studentPhone"  /></td></tr>
-<tr><th>학생이메일</th><td><input type="email" name="studentEmail" id="studentEmail"  /></td></tr>
+</select>
+<span th:if="${#fields.hasErrors('departmentNum')}" th:errors="*{departmentNum}"></span></td></tr>
+<tr><th>학생번호</th><td><input type="text" name="studentNum" id="studentNum" readonly="readonly" th:value="${studentCommand.studentNum}"/>
+<span th:if="${#fields.hasErrors('studentNum')}" th:errors="*{studentNum}"></span></td></tr>
+<tr><th>학생아이디</th><td><input type="text" name="studentId" id="studentId" />
+<span id = "idCheck"></span>
+<span th:if="${#fields.hasErrors('studentId')}" th:errors="*{studentId}"></span></td></tr>
+<tr><th>학생비밀번호</th><td><input type="password" name="studentPw" id="studentPw" />
+<span th:if="${#fields.hasErrors('studentPw')}" th:errors="*{studentPw}"></span></td></tr>
+<tr><th>비밀번호확인</th><td><input type="password" name="studentPwCon" id="studentPwCon" />
+<span th:if="${#fields.hasErrors('studentPwCon')}" th:errors="*{studentPwCon}"></span></td></tr>
+<tr><th>학생명</th><td><input type="text" name="studentName" id="studentName" />
+<span th:if="${#fields.hasErrors('studentName')}" th:errors="*{studentName}"></span></td></tr>
+<tr><th>학생연락처</th><td><input type="tel" name="studentPhone" id="studentPhone" />
+<span th:if="${#fields.hasErrors('studentPhone')}" th:errors="*{studentPhone}"></span></td></tr>
+<tr><th>학생이메일</th><td><input type="email" name="studentEmail" id="studentEmail" />
+<span id = "emailCheck"></span>
+<span th:if="${#fields.hasErrors('studentEmail')}" th:errors="*{studentEmail}"></span></td></tr>
 <tr><th colspan="2"><input type="submit" value="완료"/></th></tr>
 </table>
 </form>

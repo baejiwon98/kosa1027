@@ -3,6 +3,8 @@ package school.controller.subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,12 +40,15 @@ public class SubjectController {
 	}
 	
 	@RequestMapping(value="subjectModify", method=RequestMethod.POST)
-	public String subjectModify(SubjectCommand subjectCommand, Model model) {
+	public String subjectModify(@Validated SubjectCommand subjectCommand, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			return "thymeleaf/subject/subjectModify";
+		}
 		subjectModifyService.execute(subjectCommand, model);
 		return "redirect:subjectInfo?num="+subjectCommand.getSubjectNum();
 	}
 	
-	@RequestMapping(value="subjectModify", method=RequestMethod.GET)
+	@RequestMapping("subjectUpdate")
 	public String subjectModify(@RequestParam(value="num") String subjectNum, Model model) {
 		subjectInfoService.execute(subjectNum, model);
 		return "thymeleaf/subject/subjectModify";
@@ -68,8 +73,12 @@ public class SubjectController {
 	}
 	
 	@RequestMapping(value = "subjectInsert", method=RequestMethod.POST)
-	public String subjectInsert1(SubjectCommand subjectCommand) {
-		subjectInsertService.execute(subjectCommand);
+	public String subjectInsert1(@Validated SubjectCommand subjectCommand, BindingResult result, Model model) {
+		subjectAutoNumService.execute(subjectCommand, model);
+		if(result.hasErrors()) {
+			return "thymeleaf/subject/subjectInsert";
+		}
+		subjectInsertService.execute(subjectCommand, result, model);
 		return "redirect:subjectList";
 	}
 }

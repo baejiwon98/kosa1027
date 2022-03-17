@@ -10,14 +10,14 @@ delete from student where student_num = #{studentNum}
 
 <update id="studentUpdate" parameterType="StudentDTO">
 update student set student_num =#{studentNum}, department_num=#{departmentNum}, student_id =#{studentId}, 
-student_pw=#{studentPw}, student_name =#{studentName}, student_phone =#{studentPhone}, student_email =#{studentEmail}
-where student_num =#{studentNum}
+student_name =#{studentName}, student_phone =#{studentPhone}, student_email =#{studentEmail}
+where student_id =#{studentId}
 </update>
 
 <select id="selectOne" resultType="StudentDTO" parameterType="String">
-select student_num studentNum, department_num departmentNum, student_id studentId, student_pw studentPw, 
-student_name studentName, student_phone studentPhone, student_email studentEmail from student
-where student_num = #{studentNum}
+select student_num studentNum, s.department_num departmentNum, d.department_name departmentName, student_id studentId, student_pw studentPw, 
+student_name studentName, student_phone studentPhone, student_email studentEmail from student s, department d
+where student_num = #{studentNum} and s.department_num = d.department_num
 </select>
 
 <select id="studentCount" resultType="int">
@@ -26,8 +26,8 @@ where student_num = #{studentNum}
 
 <select id="selectAll" resultType="StudentDTO" parameterType="StartEndPageDTO">
 select * from
-(select rownum rn, student_num studentNum, department_num departmentNum, student_id studentId, student_pw studentPw, 
-student_name studentName, student_phone studentPhone, student_email studentEmail from student)
+(select rownum rn, student_num studentNum, s.department_num departmentNum, d.department_name departmentName, student_id studentId, student_pw studentPw, 
+student_name studentName, student_phone studentPhone, student_email studentEmail from student s, department d where s.department_num = d.department_num)
 where rn between #{startRow} and #{endRow}
 </select>
 

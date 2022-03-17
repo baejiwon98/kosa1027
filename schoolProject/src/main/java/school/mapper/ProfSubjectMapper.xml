@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "school.mapper.ProfSubjectMapper">
+
+<delete id="profSubjDels" parameterType="hashMap">
+	delete from professor_subject
+	<where>
+	(professor_num, subject_num) in
+	<foreach collection="condition" item="nums" index="index" open="(" close=")" separator=",">
+		<foreach collection="nums" item="num" index="index" open="(" close=")" separator=",">
+			#{num}
+		</foreach>
+	</foreach>
+	</where>
+</delete>
+
+<select id="profSubjCount" resultType="int">
+	select count(*) from professor_subject
+</select>
+
+<select id="selectAll" resultType="ProfSubjectDTO" parameterType="StartEndPageDTO">
+select * from
+(select rownum rn, ps.professor_num professorNum, ps.subject_num subjectNum, ps.status status, 
+s.subject_name subjectName, p.professor_name professorName from subject s, professor p, professor_subject ps
+where ps.professor_num = p.professor_num and ps.subject_num = s.subject_num)
+where rn between #{startRow} and #{endRow}
+</select>
+
+<insert id="profSubjInsert" parameterType="ProfSubjectDTO">
+insert into professor_subject (professor_num, subject_num) values
+(#{professorNum}, #{subjectNum})
+</insert>
+
+<select id="selectProfessorNum" resultType="ProfessorDTO">
+select professor_num professorNum, professor_name professorName from professor
+</select>
+
+<select id="selectSubjectNum" resultType="SubjectDTO">
+select subject_num subjectNum, subject_name subjectName from subject
+</select>
+</mapper>

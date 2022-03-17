@@ -14,7 +14,7 @@ public class SubjectInfoService {
 	
 	public void execute(String subjectNum, Model model) {
 	SubjectDTO dto = subjectMapper.selectOne(subjectNum);
-	model.addAttribute("dto", dto);
+	model.addAttribute("subjectCommand", dto);
 		
 	}
 

@@ -6,6 +6,44 @@
 </head>
 <body>
 교수과목리스트 <br />
+교수 과목 갯수 : [[${count}]]
+<form action="profsubjdels" method="post">
+<table border = 1 width = "600">
+<tr><th>교수명</th><th>과목 이름</th><th>폐강여부</th>
+<th><input type="submit" value="삭제"/></th></tr>
+<th:block th:each="dto, idx : ${list}">
+	<tr>
+	<th>[[${dto.professorName}]]</th>
+	<th>[[${dto.subjectName}]]</th>
+	<th>[[${dto.status}]]</th>
+	<th><input type="checkbox" name="delete" 
+			th:value="${dto.professorNum}+'`'+${dto.subjectNum}"/></th>
+	</tr>
+</th:block>
+	<tr>
+		<th colspan="6" >
+			<th:block th:if="${page <= 1 }">
+			[이전]
+			</th:block>
+			<th:block th:if ="${page > 1 }">
+			<a th:href="@{profsubjectList(page=${page - 1 })}">[이전]</a>
+			</th:block>
+			
+			<th:block th:each="i : ${#numbers.sequence(startPage, endPage)}">
+			[ <a th:href="@{profsubjectList(page=${i })}">[[${i }]]</a> ]
+ 			</th:block>
+ 			
+ 			<th:block th:if ="${page < maxPage }">
+ 			<a th:href="@{profsubjectList(page=${page + 1 })}">[이후]</a>
+ 			</th:block>
+ 			<th:block th:if ="${page >= maxPage }">
+ 			[이후]
+ 			</th:block>
+		</th>
+	</tr>
+</table>
+</form>
 <a href="profsubjInsert">교수 과목 추가</a>
+<a href="/">메인</a>
 </body>
 </html>

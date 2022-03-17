@@ -2,6 +2,8 @@ package school.service.subject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 import school.command.SubjectCommand;
 import school.domain.SubjectDTO;
@@ -11,7 +13,7 @@ import school.mapper.SubjectMapper;
 public class SubjectInsertService {
 	@Autowired
 	SubjectMapper subjectMapper;
-	public void execute(SubjectCommand subjectCommand) {
+	public void execute(SubjectCommand subjectCommand, BindingResult result, Model model) {
 		SubjectDTO dto = new SubjectDTO();
 		
 		dto.setSubjectNum(subjectCommand.getSubjectNum());

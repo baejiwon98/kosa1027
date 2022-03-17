@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import school.command.ProfessorCommand;
 import school.domain.MajorDTO;
 import school.domain.ProfessorDTO;
 import school.mapper.ProfessorMapper;
@@ -19,7 +20,7 @@ public class ProfessorInfoService {
 		List<MajorDTO> list = professorMapper.selectDepartment();
 		model.addAttribute("list", list);
 		ProfessorDTO dto = professorMapper.selectOne(professorNum);
-		model.addAttribute("dto", dto);
+		model.addAttribute("professorCommand", dto);
 		
 	}
 

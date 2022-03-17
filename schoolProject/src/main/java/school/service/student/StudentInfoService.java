@@ -19,8 +19,6 @@ public class StudentInfoService {
 		List<MajorDTO> list = studentMapper.selectDepartment();
 		model.addAttribute("list", list);
 		StudentDTO dto = studentMapper.selectOne(studentNum);
-		model.addAttribute("dto", dto);
-		
+		model.addAttribute("studentCommand", dto);
 	}
-
 }

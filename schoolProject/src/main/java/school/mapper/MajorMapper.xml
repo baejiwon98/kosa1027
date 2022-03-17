@@ -21,10 +21,16 @@ update department set department_num =#{departmentNum}, department_name =#{depar
 	where department_num = #{departmentNum}
 </select>
 
-<select id="selectAll" resultType="MajorDTO">
-	select department_num departmentNum, department_name departmentName, 
+<select id="majorCount" resultType="int">
+	select count(*) from department
+</select>
+
+<select id="selectAll" resultType="MajorDTO" parameterType="StartEndPageDTO">
+	select * from
+	(select rownum rn, department_num departmentNum, department_name departmentName, 
 	department_phone departmentPhone, department_addr departmentAddr,
-	fullAddr fullAddr, addr1 addr1, addr2 addr2, detailAddr detailAddr, zip zip from department
+	fullAddr fullAddr, addr1 addr1, addr2 addr2, detailAddr detailAddr, zip zip from department)
+	where rn between #{startRow} and #{endRow}
 </select>
 
 <select id="autoNum" resultType="String">

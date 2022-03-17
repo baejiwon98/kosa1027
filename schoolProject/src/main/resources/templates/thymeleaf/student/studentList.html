@@ -8,10 +8,11 @@
 학생 리스트<br />
 학생 총 인원 : [[${count}]]
 <table border = 1 width = "600">
-<tr><th>학생번호</th><th>학생 이름</th><th> 학생 아이디</th></tr>
+<tr><th>학생번호</th><th>학과</th><th>학생 이름</th><th> 학생 아이디</th></tr>
 <th:block th:each="dto, idx : ${list}">
 	<tr>
 	<th><a th:href="@{studentInfo(num=${dto.studentNum})}">[[${dto.studentNum}]]</a></th>
+	<th>[[${dto.departmentName}]]</th>
 	<th><a th:href="@{studentInfo(num=${dto.studentNum})}">[[${dto.studentName}]]</a></th>
 	<th>[[${dto.studentId}]]</th>
 	</tr>
@@ -39,5 +40,6 @@
 	</tr>
 </table>
 <a href="studentInsert">추가</a>
+<a href="/">메인</a>
 </body>
 </html>

@@ -6,11 +6,15 @@
 </head>
 <body>
 과목추가페이지
-<form action="subjectInsert" id = "frm" name="frm" method="post">
-과목번호 : <input type="text" name="subjectNum" id="subjectNum" readonly="readonly" th:value=${subjectCommand.subjectNum} /><br />
-과목명 : <input type="text" name="subjectName" id="subjectName" th:value=${subjectCommand.subjectName}/><br />
-제목 : <input type="text" name="subjectTitle" id="subjectTitle" th:value=${subjectCommand.subjectTitle}/><br />
+<form action="subjectInsert" id = "frm" name="frm" method="post" th:object="${subjectCommand}">
+과목번호 : <input type="text" name="subjectNum" id="subjectNum" readonly="readonly" th:value=${subjectCommand.subjectNum} />
+<span th:if="${#fields.hasErrors('subjectNum')}" th:errors="*{subjectNum}"></span><br />
+과목명 : <input type="text" name="subjectName" id="subjectName" th:value=${subjectCommand.subjectName}/>
+<span th:if="${#fields.hasErrors('subjectName')}" th:errors="*{subjectName}"></span><br />
+제목 : <input type="text" name="subjectTitle" id="subjectTitle" th:value=${subjectCommand.subjectTitle}/>
+<span th:if="${#fields.hasErrors('subjectTitle')}" th:errors="*{subjectTitle}"></span><br />
 내용 : <textarea name="subjectContent" id="subjectContent" th:value=${subjectCommand.subjectContent} rows="6"></textarea>
+<span th:if="${#fields.hasErrors('subjectContent')}" th:errors="*{subjectContent}"></span>
 <br />
 <input type="submit" value="완료" />
 </form>

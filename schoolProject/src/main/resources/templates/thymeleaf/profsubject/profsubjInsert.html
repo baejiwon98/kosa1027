@@ -6,8 +6,22 @@
 </head>
 <body>
 교수과목추가링<br />
-<form action="">
-
+<form action="profsubjInsert" id="frm" name="frm" method="post">
+<table>
+<tr><th>교수 번호</th><td>
+<select id="professorNum" name="professorNum">
+	<th:block th:each = "dto, idx : ${list}">
+		<option th:value="${dto.professorNum}">[[${dto.professorName}]]</option>
+	</th:block>
+</select></td></tr>
+<tr><th>과목번호 번호</th><td>
+<select id="subjectNum" name="subjectNum">
+	<th:block th:each = "dto, idx : ${sub}">
+		<option th:value="${dto.subjectNum}">[[${dto.subjectName}]]</option>
+	</th:block>
+</select></td></tr>
+<tr><th colspan="2"><input type="submit" value="완료"/></th></tr>
+</table>
 </form>
 </body>
 </html>

@@ -14,7 +14,7 @@ import school.mapper.StudentMapper;
 public class StudentAutoNumService {
 	@Autowired
 	StudentMapper studentMapper;
-	public void execute(StudentCommand studentCommand, Model model) {
+	public void execute(Model model) {
 		List<MajorDTO> list = studentMapper.selectDepartment();
 		model.addAttribute("list", list);
 	}

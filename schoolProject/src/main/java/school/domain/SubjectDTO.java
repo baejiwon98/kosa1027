@@ -11,4 +11,29 @@ public class SubjectDTO {
 	String subjectName;
 	String subjectTitle;
 	String subjectContent;
+	public String getSubjectNum() {
+		return subjectNum;
+	}
+	public void setSubjectNum(String subjectNum) {
+		this.subjectNum = subjectNum;
+	}
+	public String getSubjectName() {
+		return subjectName;
+	}
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+	public String getSubjectTitle() {
+		return subjectTitle;
+	}
+	public void setSubjectTitle(String subjectTitle) {
+		this.subjectTitle = subjectTitle;
+	}
+	public String getSubjectContent() {
+		return subjectContent;
+	}
+	public void setSubjectContent(String subjectContent) {
+		this.subjectContent = subjectContent;
+	}
+	
 }

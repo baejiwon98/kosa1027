@@ -6,14 +6,14 @@
 </head>
 <body>
 상세정보쓰<br />
-교수번호 : [[${dto.professorNum}]]<br />
-학과번호 : [[${dto.departmentNum}]]<br />
-아이디 : [[${dto.professorId}]]<br />
-교수이름 : [[${dto.professorName}]]<br />
-교수연락처 : [[${dto.professorPhone}]]<br />
-교수이메일 : [[${dto.professorEmail}]]<br />
-<a th:href="@{professorModify(num=${dto.professorNum})}">수정</a>
-<a th:href="@{professorDelete(num=${dto.professorNum})}">삭제</a>
+교수번호 : [[${professorCommand.professorNum}]]<br />
+학과 : [[${professorCommand.departmentName}]]<br />
+아이디 : [[${professorCommand.professorId}]]<br />
+교수이름 : [[${professorCommand.professorName}]]<br />
+교수연락처 : [[${professorCommand.professorPhone}]]<br />
+교수이메일 : [[${professorCommand.professorEmail}]]<br />
+<a th:href="@{professorModify(num=${professorCommand.professorNum})}">수정</a>
+<a th:href="@{professorDelete(num=${professorCommand.professorNum})}">삭제</a>
 <a href="professorList">교수리스트로갈까여?</a>
 </body>
 </html>
