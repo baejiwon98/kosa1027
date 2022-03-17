@@ -10,14 +10,14 @@ delete from professor where professor_num = #{professorNum}
 
 <update id="professorUpdate" parameterType="ProfessorDTO">
 update professor set professor_num =#{professorNum}, department_num=#{departmentNum}, professor_id =#{professorId}, 
-professor_pw=#{professorPw}, professor_name =#{professorName}, professor_phone =#{professorPhone}, professor_email =#{professorEmail}
+professor_name =#{professorName}, professor_phone =#{professorPhone}, professor_email =#{professorEmail}
 where professor_num = #{professorNum}
 </update>
 
 <select id="selectOne" resultType="ProfessorDTO" parameterType="String">
-select professor_num professorNum, department_num departmentNum, professor_id professorId, 
-professor_pw professorPw, professor_name professorName, professor_phone professorPhone, professor_email professorEmail from professor
-where professor_num = #{professorNum}
+select p.professor_num professorNum, p.department_num departmentNum, d.department_name departmentName, p.professor_id professorId, 
+p.professor_pw professorPw, p.professor_name professorName, p.professor_phone professorPhone, p.professor_email professorEmail from professor p, department d
+where p.professor_num = #{professorNum} and p.department_num = d.department_num
 </select>
 
 <select id="professorCount" resultType="int">
@@ -26,8 +26,8 @@ where professor_num = #{professorNum}
 
 <select id="selectAll" resultType="ProfessorDTO" parameterType="StartEndPageDTO">
 select * from
-(select rownum rn, professor_num professorNum, department_num departmentNum, professor_id professorId, 
-professor_pw professorPw, professor_name professorName, professor_phone professorPhone, professor_email professorEmail from professor)
+(select rownum rn, professor_num professorNum, p.department_num departmentNum, d.department_name departmentName, professor_id professorId, 
+professor_pw professorPw, professor_name professorName, professor_phone professorPhone, professor_email professorEmail from professor p, department d where p.department_num = d.department_num)
 where rn between #{startRow} and #{endRow}
 </select>
 

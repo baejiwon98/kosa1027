@@ -9,6 +9,7 @@ import lombok.Data;
 public class StudentDTO {
 	String studentNum;
 	String departmentNum;
+	String departmentName;
 	String studentId;
 	String studentPw;
 	String studentName;

@@ -4,7 +4,21 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace = "school.mapper.LoginMapper">
 
-<select id="loginSelect" parameterType="string" resultType="school.domain.AuthInfo">
+<select id="findId" parameterType="String" resultType="AuthInfo">
+select professor_id userId from professor where lower(professor_email) = lower(#{email})
+union
+select student_id userId from student where lower(student_email) = lower(#{email})
+</select>
+
+<select id="emailSelect"  parameterType="string" resultType="string">
+	select professor_Email from professor
+	where professor_id = #{professorId}
+	union 
+	select student_email from student
+	where student_id = #{studentId}
+</select>
+
+<select id="loginSelect" parameterType="string" resultType="AuthInfo">
 select student_id userId, student_pw userPw, 'stu' grade from student 
 where student_id = #{userId}
 union 

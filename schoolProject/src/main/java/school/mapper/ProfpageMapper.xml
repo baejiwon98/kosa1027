@@ -9,9 +9,9 @@ select department_num departmentNum, department_name departmentName from departm
 </select>
 
 <select id="selectOne" parameterType="String" resultType="ProfessorDTO">
-	select professor_num professorNum, department_num departmentNum, professor_id professorId, 
-	professor_pw professorPw, professor_name professorName,	professor_phone professorPhone, 
-	professor_email professorEmail from professor where professor_id = #{professorId}
+select p.professor_num professorNum, p.department_num departmentNum, d.department_name departmentName, p.professor_id professorId, 
+p.professor_pw professorPw, p.professor_name professorName, p.professor_phone professorPhone, p.professor_email professorEmail from professor p, department d
+where p.professor_id = #{professorId} and p.department_num = d.department_num
 </select>
 
 <update id="profUpdate" parameterType="ProfessorDTO">

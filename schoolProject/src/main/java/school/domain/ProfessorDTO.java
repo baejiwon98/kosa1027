@@ -9,6 +9,7 @@ import lombok.Data;
 public class ProfessorDTO {
 	String professorNum;
 	String departmentNum;
+	String departmentName;
 	String professorId;
 	String professorPw;
 	String professorName;
