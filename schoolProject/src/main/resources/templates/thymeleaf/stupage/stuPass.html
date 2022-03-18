@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+학생비번바꾸삼<br />
+<form action = "passwordStu" method = "post">
+비밀번호 : <input type="password" name="empPw" />
+<span th:if="${err_pw != null}" th:text="${err_pw}" style="color:red"></span><br />
+<input type="submit" value="비밀번호 확인" />
+</body>
+</html>

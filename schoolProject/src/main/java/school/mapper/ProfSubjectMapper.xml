@@ -4,6 +4,41 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace = "school.mapper.ProfSubjectMapper">
 
+<update id="profSubjReCancels" parameterType="hashMap">
+	update professor_subject set status = 'N'
+	<where>
+	(professor_num, subject_num) in
+	<foreach collection="condition" item="nums" index="index" open="(" close=")" separator=",">
+		<foreach collection="nums" item="num" index="index" open="(" close=")" separator=",">
+			#{num}
+		</foreach>
+	</foreach>
+	</where>
+</update>
+
+<update id="profSubjCancels" parameterType="hashMap">
+	update professor_subject set status = 'Y'
+	<where>
+	(professor_num, subject_num) in
+	<foreach collection="condition" item="nums" index="index" open="(" close=")" separator=",">
+		<foreach collection="nums" item="num" index="index" open="(" close=")" separator=",">
+			#{num}
+		</foreach>
+	</foreach>
+	</where>
+</update>
+
+<select id="selectMyAll" resultType="ProfSubjectDTO" parameterType="String">
+select ps.professor_num professorNum, ps.subject_num subjectNum, ps.status status, 
+s.subject_name subjectName, p.professor_name professorName 
+from subject s, professor p, professor_subject ps
+where ps.professor_num = p.professor_num and ps.subject_num = s.subject_num and ps.professor_num = #{getNum}
+</select>
+
+<select id="getNum" resultType="String" parameterType="String">
+select professor_Num from professor where professor_id = #{professorId}
+</select>
+
 <delete id="profSubjDels" parameterType="hashMap">
 	delete from professor_subject
 	<where>
@@ -29,8 +64,8 @@ where rn between #{startRow} and #{endRow}
 </select>
 
 <insert id="profSubjInsert" parameterType="ProfSubjectDTO">
-insert into professor_subject (professor_num, subject_num) values
-(#{professorNum}, #{subjectNum})
+insert into professor_subject (professor_num, subject_num, status) values
+(#{professorNum}, #{subjectNum}, #{status})
 </insert>
 
 <select id="selectProfessorNum" resultType="ProfessorDTO">

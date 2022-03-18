@@ -20,6 +20,7 @@ public class GoodsItemService {
 		System.out.println("knasvkojgsBDgvaq");
 		int limit = 3;
 		int limitPage = 10;
+		
 		Long startRow = ((long)page - 1) * limit +1;
 		Long endRow = startRow + limit - 1;
 		StartEndPageDTO dto = new StartEndPageDTO();

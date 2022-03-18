@@ -4,6 +4,10 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace = "school.mapper.ProfpageMapper">
 
+<update id="updatePassword" parameterType="ProfessorDTO">
+update professor set professor_pw = #{professorPw} where professor_id = #{professorId}
+</update>
+
 <select id="selectDepartment" resultType="MajorDTO">
 select department_num departmentNum, department_name departmentName from department
 </select>
@@ -18,10 +22,6 @@ where p.professor_id = #{professorId} and p.department_num = d.department_num
 update professor set professor_num =#{professorNum}, department_num=#{departmentNum}, professor_id =#{professorId}, 
 professor_name =#{professorName}, professor_phone =#{professorPhone}, professor_email =#{professorEmail}
 where professor_num = #{professorNum}
-</update>
-
-<update id="updatePassword" parameterType="ProfessorDTO">
-update professor set professor_pw = #{professorPw} where professor_id = #{professorId}
 </update>
 
 </mapper>

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import school.command.MajorCommand;
 import school.domain.MajorDTO;
 import school.mapper.MajorMapper;
 
@@ -15,7 +16,7 @@ public class MajorInfoService {
 	MajorMapper majorMapper;
 	public void execute(String departmentNum, Model model) {
 		MajorDTO dto = majorMapper.selectOne(departmentNum);
-		model.addAttribute("dto", dto);
+		model.addAttribute("majorCommand", dto);
 	}
 
 }

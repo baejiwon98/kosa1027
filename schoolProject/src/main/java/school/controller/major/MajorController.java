@@ -6,9 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import school.command.MajorCommand;
 import school.service.major.MajorAutoNumServiece;
@@ -34,34 +34,41 @@ public class MajorController {
 	@Autowired
 	MajorDeleteService majorDeleteService;
 	
-	@RequestMapping("majorDelete/{departmentNum}")
-	public String majorDelete(@PathVariable(value="departmentNum") String departmentNum) {
+	@ModelAttribute
+	MajorCommand setMajorCommand() {
+		return new MajorCommand();
+	}
+	
+	@RequestMapping("majorDelete")
+	public String majorDelete(@RequestParam(value="num") String departmentNum) {
 		majorDeleteService.execute(departmentNum);
-		return "redirect:../majorList";
+		return "redirect:majorList";
 	}
 	
 	@RequestMapping(value = "majorUpdate", method=RequestMethod.POST)
-	public String majorUpdate1(@ModelAttribute MajorCommand majorCommand, BindingResult result, Model model) {
+	public String majorUpdate1(@Validated MajorCommand majorCommand, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			return "thymeleaf/major/majorUpdate";
+		}
 		majorUpdateService.execute(majorCommand, model);
-		String addr = majorCommand.getDepartmentNum();
-		return "redirect:majorInfo/"+addr;
+		return "redirect:majorInfo?num="+majorCommand.getDepartmentNum();
 	}
 	
-	@RequestMapping(value = "majorUpdate/{departmentNum}", method=RequestMethod.GET)
-	public String majorUpdate(@PathVariable(value="departmentNum") String departmentNum, Model model) {
+	@RequestMapping("majorModify")
+	public String majorUpdate(@RequestParam(value="num") String departmentNum, Model model) {
 		majorInfoService.execute(departmentNum, model);
 		return "thymeleaf/major/majorUpdate";
 	}
 	
-	@RequestMapping("majorInfo/{departmentNum}")
-	public String majorInfo(@PathVariable(value="departmentNum") String departmentNum, Model model) {
+	@RequestMapping("majorInfo")
+	public String majorInfo(@RequestParam(value="num") String departmentNum, Model model) {
 		majorInfoService.execute(departmentNum, model);
 		return "thymeleaf/major/majorInfo";
 	}
 	
 	@RequestMapping("majorList")
-	public String majorList(Model model) {
-		majorListService.execute(model);
+	public String majorList(Model model , @RequestParam(value="page", defaultValue = "1", required = false) Integer page) {
+		majorListService.execute(model,page);
 		return "thymeleaf/major/majorList";
 	}
 	

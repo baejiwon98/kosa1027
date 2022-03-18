@@ -34,11 +34,11 @@ $(function(){
 <form action="professorUpdate" id="frm" name="frm" method="post" th:object="${professorCommand}">
 <table>
 <tr><th>교수번호</th><td><input type="text" name="professorNum" id="professorNum" readonly="readonly" th:value="${professorCommand.professorNum}"/>
-<span th:if="${#fields.hasErrors('professorNum')}" th:errors="*{professorNum}"></span></td></tr></td></tr>
+<span th:if="${#fields.hasErrors('professorNum')}" th:errors="*{professorNum}"></span></td></tr>
 <tr><th>학과번호</th><td>
 <select id="departmentNum" name="departmentNum" th:object="${professorCommand.departmentNum}" th:value="${professorCommand.departmentNum}">
 	<th:block th:each = "aaa, idx : ${list}">
-		<option th:value="${aaa.departmentNum}">[[${aaa.departmentName}]]</option>
+		<option th:value="${aaa.departmentNum}" th:selected= "${aaa.departmentNum} == ${professorCommand.departmentNum}">[[${aaa.departmentName}]]</option>
 	</th:block>
 </select>
 <span th:if="${#fields.hasErrors('departmentNum')}" th:errors="*{departmentNum}"></span></td></tr>

@@ -12,6 +12,12 @@ public class DepController {
 	@Autowired
 	StudentDepNumService studentDepNumService;
 	
+	@RequestMapping("stupage/depNum")
+	public String depNum1(StudentCommand studentCommand) {
+		String studentNum = studentDepNumService.execute(studentCommand);
+		return studentNum;
+	}
+	
 	@RequestMapping("student/depNum")
 	public String depNum(StudentCommand studentCommand) {
 		String studentNum = studentDepNumService.execute(studentCommand);

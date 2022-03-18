@@ -19,5 +19,10 @@ public interface ProfSubjectMapper {
 	public int profSubjCount();
 	public List<ProfSubjectDTO> selectAll(StartEndPageDTO dto);
 	public Integer profSubjDels(List<String[]> condition);
+	public int profMySubjCount(String professorNum);
+	public String getNum(String userId);
+	public List<ProfSubjectDTO> selectMyAll(String getNum);
+	public Integer profSubjCancels(List<String[]> condition);
+	public Integer profSubjReCancels(List<String[]> condition);
 
 }

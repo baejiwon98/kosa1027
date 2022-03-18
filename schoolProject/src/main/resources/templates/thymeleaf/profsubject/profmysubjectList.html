@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+나의교수과목리스트 <br />
+<form id="frm" name="frm" method="post">
+<table border = 1 width = "600">
+<tr><th>교수명</th><th>과목 이름</th><th>폐강여부</th>
+<th><input type="submit" value="폐강" formaction="profsubjCancels"></th></tr>
+<th:block th:each="dto, idx : ${list}">
+	<tr>
+	<th>[[${dto.professorName}]]</th>
+	<th>[[${dto.subjectName}]]</th>
+	<th>[[${dto.status}]]</th>
+	<th><input type="checkbox" name="cancel" 
+			th:value="${dto.professorNum}+'`'+${dto.subjectNum}"/></th>
+	</tr>
+</th:block>
+<tr>
+<th colspan="3"></th>
+<th><input type="submit" value="폐강취소" formaction="profsubjReCancels"/></th></tr>
+</table>
+</form>
+<a href="/">메인</a>
+</body>
+</html>

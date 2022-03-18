@@ -11,7 +11,7 @@ delete from student where student_num = #{studentNum}
 <update id="studentUpdate" parameterType="StudentDTO">
 update student set student_num =#{studentNum}, department_num=#{departmentNum}, student_id =#{studentId}, 
 student_name =#{studentName}, student_phone =#{studentPhone}, student_email =#{studentEmail}
-where student_num =#{studentNum}
+where student_id =#{studentId}
 </update>
 
 <select id="selectOne" resultType="StudentDTO" parameterType="String">

@@ -6,11 +6,15 @@
 </head>
 <body>
 수정창<br />
-<form action="subjectModify" id="frm" name="frm" method="post">
-과목 번호 : <input type="text" id="subjectNum" name="subjectNum" th:value="${dto.subjectNum}" readonly="readonly"/><br/>
-과목명 : <input type="text" id="subjectName" name="subjectName" th:value="${dto.subjectName}"/><br/>
-과목 제목 : <input type="text"  id="subjectTitle" name="subjectTitle" th:value="${dto.subjectTitle}"/><br/>
-과목 내용 : <textarea rows="6" id="subjectContent" name="subjectContent" th:value="${dto.subjectContent}">[[${dto.subjectContent}]]</textarea><br />
+<form action="subjectModify" id="frm" name="frm" method="post" th:object="${subjectCommand}">
+과목 번호 : <input type="text" id="subjectNum" name="subjectNum" th:value="${subjectCommand.subjectNum}" readonly="readonly"/>
+<span th:if="${#fields.hasErrors('subjectNum')}" th:errors="*{subjectNum}"></span><br/>
+과목명 : <input type="text" id="subjectName" name="subjectName" th:value="${subjectCommand.subjectName}"/>
+<span th:if="${#fields.hasErrors('subjectName')}" th:errors="*{subjectName}"></span><br />
+과목 제목 : <input type="text"  id="subjectTitle" name="subjectTitle" th:value="${subjectCommand.subjectTitle}"/>
+<span th:if="${#fields.hasErrors('subjectTitle')}" th:errors="*{subjectTitle}"></span><br />
+과목 내용 : <textarea rows="6" id="subjectContent" name="subjectContent" th:value="${subjectCommand.subjectContent}">[[${subjectCommand.subjectContent}]]</textarea>
+<span th:if="${#fields.hasErrors('subjectContent')}" th:errors="*{subjectContent}"></span><br />
 <input type="submit" value="수정하기"/>
 </form>
 </body>

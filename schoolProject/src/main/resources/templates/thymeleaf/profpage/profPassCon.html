@@ -5,6 +5,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<form action=passwordProCon method = "post" name = "frm" id = "frm">
+현재 비밀번호 : <input type="password" name="professorPw" id = "professorPw"/>
+<span th:if="${err_pw != null}" th:text="${err_pw}" style="color:red"></span> <br />
+바꿀 비밀번호 : <input type="password" name="newprofessorPw" id = "newprofessorPw"/> <br />
+비밀번호 확인 : <input type="password" name="newprofessorPwCon" id = "newprofessorPwCon"/>
+<span th:if="${err_pwCon != null}" th:text="${err_pwCon}" style="color:red"></span><br />
+<input type="submit" value="비밀번호 변경하기" />
+</form>
 </body>
 </html>

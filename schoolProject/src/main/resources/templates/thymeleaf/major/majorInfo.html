@@ -6,12 +6,12 @@
 </head>
 <body>
 상세히상세보는학과정보쓰<br />
-학과번호 : [[${dto.departmentNum}]]<br />
-학과명 : [[${dto.departmentName}]]<br />
-학과연락처 : [[${dto.departmentPhone}]]<br />
-학과 주소 : [[${dto.departmentAddr}]]<br />
-<a th:href="|/major/majorUpdate/${dto.departmentNum}|">수정</a>
-<a th:href="|/major/majorDelete/${dto.departmentNum}|">삭제</a>
-<a href="/major/majorList">학과정보리스트로갈까여?</a>
+학과번호 : [[${majorCommand.departmentNum}]]<br />
+학과명 : [[${majorCommand.departmentName}]]<br />
+학과연락처 : [[${majorCommand.departmentPhone}]]<br />
+학과 주소 : [[${majorCommand.departmentAddr}]]<br />
+<a th:href="@{majorModify(num=${majorCommand.departmentNum})}">수정</a>
+<a th:href="@{majorDelete(num=${majorCommand.departmentNum})}">삭제</a>
+<a href="majorList">학과정보리스트로갈까여?</a>
 </body>
 </html>

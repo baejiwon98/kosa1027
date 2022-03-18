@@ -19,10 +19,10 @@ select student_id userId from student where lower(student_email) = lower(#{email
 </select>
 
 <select id="loginSelect" parameterType="string" resultType="AuthInfo">
-select student_id userId, student_pw userPw, 'stu' grade from student 
+select student_id userId, student_pw userPw, 'stu' grade, student_num userNum from student 
 where student_id = #{userId}
 union 
-select professor_id, professor_pw, 'prof' from professor where professor_id = #{userId}
+select professor_id, professor_pw, 'prof', professor_num from professor where professor_id = #{userId}
 </select>
 
 </mapper>

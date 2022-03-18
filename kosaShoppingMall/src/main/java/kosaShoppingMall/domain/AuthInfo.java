@@ -10,6 +10,8 @@ public class AuthInfo {
 	String phone;
 	String email;
 	String memOk;
+	String userNum;
+	
 	public String getMemOk() {
 		return memOk;
 	}

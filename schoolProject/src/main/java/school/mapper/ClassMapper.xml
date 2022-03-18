@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "school.mapper.ClassMapper">
+
+<delete id="classWishCancels" parameterType="hashMap">
+	delete from courses_subject
+	<where>
+	(subject_Num, professor_num, student_num) in
+	<foreach collection="condition" item="nums" index="index" open="(" close=")" separator=",">
+		<foreach collection="nums" item="num" index="index" open="(" close=")" separator=",">
+			#{num}
+		</foreach>
+	</foreach>
+	</where>
+</delete>
+
+<select id="selectAll" resultType="CourseDTO" parameterType="String">
+	select 
+	cs.professor_num professorNum, cs.subject_num subjectNum, 
+	cs.student_num studentNum, p.professor_name professorName,
+	sub.subject_name subjectName, s.student_name studentName
+	from courses_subject cs, professor p, student s, subject sub
+	where cs.professor_num = p.professor_num and cs.subject_num = sub.subject_num 
+	and cs.student_num = s.student_num and cs.student_num = #{studentNum}
+</select>
+
+<insert id="classInsert" parameterType="CourseDTO">
+insert into courses_subject (professor_num, student_Num, subject_Num) 
+values (#{professorNum}, #{studentNum}, #{subjectNum})
+</insert>
+
+</mapper>

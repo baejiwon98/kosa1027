@@ -36,5 +36,4 @@ public class StartEndPageDTO {
 	public void setGoodsName(String goodsName) {
 		this.goodsName = goodsName;
 	}
-	
 }

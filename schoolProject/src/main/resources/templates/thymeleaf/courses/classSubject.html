@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+$(function(){
+	$("#subjectNum").change(function(){
+		$.ajax({
+			type:"post",
+			url:"professorList",
+			dataType:"html",
+			data:{"subjectNum":$("#subjectNum").val()},
+			success:function(result){
+				$("#cDTO").html(result);
+			}
+		});
+	});
+});
+</script>
+</head>
+<body>
+<div id="bDTO">
+	<select id = "subjectNum" name="subjectNum">
+		<option value = "0">---과목을 선택해주세요---</option>
+		<th:blank th:each="dto : ${list}">
+			<option th:value="${dto.subjectNum}">[[${dto.subjectName}]]</option>
+		</th:blank>
+	</select>
+</div>
+</body>
+</html>

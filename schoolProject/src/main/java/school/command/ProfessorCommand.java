@@ -28,4 +28,69 @@ public class ProfessorCommand {
 	public boolean isProfPwEqualsProfPwCon() {
 		return professorPw.equals(professorPwCon);
 	}
+
+	public String getProfessorNum() {
+		return professorNum;
+	}
+
+	public void setProfessorNum(String professorNum) {
+		this.professorNum = professorNum;
+	}
+
+	public String getDepartmentNum() {
+		return departmentNum;
+	}
+
+	public void setDepartmentNum(String departmentNum) {
+		this.departmentNum = departmentNum;
+	}
+
+	public String getProfessorId() {
+		return professorId;
+	}
+
+	public void setProfessorId(String professorId) {
+		this.professorId = professorId;
+	}
+
+	public String getProfessorPw() {
+		return professorPw;
+	}
+
+	public void setProfessorPw(String professorPw) {
+		this.professorPw = professorPw;
+	}
+
+	public String getProfessorPwCon() {
+		return professorPwCon;
+	}
+
+	public void setProfessorPwCon(String professorPwCon) {
+		this.professorPwCon = professorPwCon;
+	}
+
+	public String getProfessorName() {
+		return professorName;
+	}
+
+	public void setProfessorName(String professorName) {
+		this.professorName = professorName;
+	}
+
+	public String getProfessorPhone() {
+		return professorPhone;
+	}
+
+	public void setProfessorPhone(String professorPhone) {
+		this.professorPhone = professorPhone;
+	}
+
+	public String getProfessorEmail() {
+		return professorEmail;
+	}
+
+	public void setProfessorEmail(String professorEmail) {
+		this.professorEmail = professorEmail;
+	}
+	
 }

@@ -6,14 +6,14 @@
 </head>
 <body>
 상세정보쓰<br />
-학생번호 : [[${dto.studentNum}]]<br />
-학과 : [[${dto.departmentName}]]<br />
-아이디 : [[${dto.studentId}]]<br />
-학생이름 : [[${dto.studentName}]]<br />
-학생연락처 : [[${dto.studentPhone}]]<br />
-학생이메일 : [[${dto.studentEmail}]]<br />
-<a th:href="@{studentModify(num=${dto.studentNum})}">수정</a>
-<a th:href="@{studentDelete(num=${dto.studentNum})}">삭제</a>
+학생번호 : [[${studentCommand.studentNum}]]<br />
+학과 : [[${studentCommand.departmentName}]]<br />
+아이디 : [[${studentCommand.studentId}]]<br />
+학생이름 : [[${studentCommand.studentName}]]<br />
+학생연락처 : [[${studentCommand.studentPhone}]]<br />
+학생이메일 : [[${studentCommand.studentEmail}]]<br />
+<a th:href="@{studentUpdate(num=${studentCommand.studentNum})}">수정</a>
+<a th:href="@{studentDelete(num=${studentCommand.studentNum})}">삭제</a>
 <a href="studentList">학생리스트로갈까여?</a>
 </body>
 </html>
